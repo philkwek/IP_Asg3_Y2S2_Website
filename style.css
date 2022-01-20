@@ -1,0 +1,72 @@
+h1 {
+    font-weight: 900;
+}
+
+input {
+    box-sizing: border-box;
+    border-color: transparent;
+    background-color: rgb(236, 236, 236);
+    border-radius: 10px;
+    width: 340px;
+    height: 50px;
+}
+
+input[type=text], input[type=email], input[type=password] {
+    margin-top:0.5rem;
+    padding: 10px;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+.center-element{
+    height: 100vh;
+}
+
+.formButton{
+    width: 200px;
+    border-radius: 32px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+#landingTitle{
+    position: absolute;
+    margin-top:4%;
+    margin-left: 4%;
+}
+
+#signupPageButton{
+    background-color: black;
+    border-color: transparent;
+    color: white;
+}
+
+#signupButton{
+    color: black;
+    background-color: rgb(216, 216, 216);
+    border-color: transparent;
+    height: 46spx;
+}
+
+#loginPageButton{
+    color: black;
+    border-color: transparent;
+    background-color: rgb(216, 216, 216);
+}
+
+#resetPasswordButton{
+    color: black;
+    border-color: transparent;
+    background-color: rgb(216, 216, 216);
+    width: 280px;
+}
+
+#loginButton{
+    color: black;
+    background-color: rgb(216, 216, 216);
+    border-color: transparent;
+    height: 46spx;
+    margin-top: 3rem;
+}
