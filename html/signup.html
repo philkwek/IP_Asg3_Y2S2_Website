@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>HomeTools 3D</title>
+    <link href="../style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+
+     <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CDN reference for jQuery slim-->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" 
+    integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12">
+          <h1 id="landingTitle">HomeTools 3D</h1>
+        </div>
+      </div>
+
+      <div class="center-element row justify-content-center align-items-center mt-4">
+        <div class = "col-12 d-flex flex-column align-items-center">
+
+          <div class="text-center">
+            <h2 style="margin-bottom: 2rem;">Create New Account</h2>
+          </div>
+
+          <form>
+            <div>
+              <label for="email">Email:</label><br>
+              <input type="email" id = "emailInput" name = "email"><br><br>
+            </div>
+  
+            <div>
+              <label for="username">Name:</label><br>
+              <input type="text" id = "usernameInput" name = "username"><br><br>
+            </div>
+
+            <div>
+                <label for="userId">UserID:</label><br>
+                <input type="text" id = "userIdInput" name = "userId" placeholder="username#0000"><br><br>
+            </div>
+  
+            <div>
+              <label for="password">Password:</label><br>
+              <input type = "password" id = "passwordInput" name = "password"><br><br>
+            </div>
+
+            <div class="d-flex flex-row">
+              <div class="flex-fill">
+                <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe">
+                <label class="form-check-label" for="rememberMe">Remember me </label>
+              </div>
+            </div>
+
+            <div class="text-center mt-5">
+              <input class = "formButton m-2" type = "button" id = "signupButton" value = "Sign Up">
+            </div>
+
+            <div class="text-center mt-3">
+              <a href="" id="openLoginAccount">Already have a Account? Login here</a>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <!-- References for scripts -->
+  <script src="../scripts/objectsScript.js"></script>
+  <script src="../script.js"></script>
+  <script type="module" src = "../scripts/config.js"></script>
+  <script type="module" src = "../scripts/firebaseScript.js"></script>
+  
+</html>
