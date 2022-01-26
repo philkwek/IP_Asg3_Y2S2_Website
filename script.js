@@ -5,7 +5,15 @@ var loginPageButton = document.getElementById("loginPageButton");
 var landingTitle = document.getElementById("landingTitle")
 var openCreateAccount = document.getElementById("openCreateAccount")
 var openLoginAccount = document.getElementById("openLoginAccount");
+var createCompanyCheck = document.getElementById("createCompany");
 //Listeners for button presses
+if(createCompanyCheck){
+    createCompanyCheck.addEventListener("click", function(x){
+        x.preventDefault();
+        document.getElementById("createCompanyInput").style.display = "inline";
+    })
+}
+
 if (signupPageButton){
     signupPageButton.addEventListener("click", function(x){
         x.preventDefault();
