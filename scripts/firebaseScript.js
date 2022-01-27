@@ -34,17 +34,9 @@ function signUpUser(email, username, password, authType, userId){
     setPersistence(auth, authType)
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-        // Signed in 
-        var user = userCredential.user;
-        //Calls function to create a new user profile for realtimeDB
-        writeUserData(email, username, userId, user.uid);
-
-        if (createCompanyCheck.checked){  // check if user is creating account with new company or just account
-            //open create company page
-
-        } else {
-            //open homepage menu
-        }
+        //Runs if user logged in
+        var user = userCredential.user; 
+        writeUserData(email, username, userId, user.uid); //Calls function to create a new user profile for realtimeDB
         return;
     })
     .catch((error) => {
@@ -90,18 +82,18 @@ function forgotPassword(email){
 console.log("Sending email...")
 const auth = getAuth();
 sendPasswordResetEmail(auth, email)
-.then(() => {
-  // Password reset email sent!
-  console.log("Email sent!");
-  alert("Email sent!");
-  // ..
-})
-.catch((error) => {
-  const errorCode = error.code;
-  const errorMessage = error.message;
-  alert(errorMessage);
-  // ..
-});
+    .then(() => {
+        // Password reset email sent!
+        console.log("Email sent!");
+        alert("Email sent!");
+        // ..
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+        // ..
+    });
 }
 
 //function for writing user data into the realtimeDB
@@ -112,14 +104,36 @@ function writeUserData(email, username, userId, databaseId) {
   set(ref(db, 'users/' + databaseId), newUser)
   .then(()=>{
       console.log("User data written successfully");
+      if (createCompanyCheck.checked){  // check if user is creating account with new company or just account
+        //open create company page
+        window.location.href = "createCompany.html"
+    } else {
+            //open homepage menu
+        }
   })
   .catch((error)=>{
       console.log("Error uploading data!");
   });
 }
 
-function createCompany(companyName, companyId){
+function createCompany(companyName, companyId, databaseId){
     //check if ID or Name already exist,
+    const dbref = ref(db);
+    get(child(dbref, "company/" + companyId)).then((snapshot)=>{
+      if(snapshot.exists()){
+        alert("Company ID already exists! Please change to a different ID.");
+      } else {  
+          console.log(databaseId);
+          let newEmployeeList = new employeeList(databaseId);
+          let newCompany = new Company(companyName, companyId, newEmployeeList)
+          set(ref(db, 'company/' + companyId), newCompany);
+
+          const companyIdUpdate = {};
+          companyIdUpdate['/users/' + databaseId + "/companyId"] = companyId;
+          return update(dbref, companyIdUpdate);
+      }
+    });
+
     //if not, create new company, add current user then open alert and go to homepage
     //if yes, return alert error
 }
@@ -200,14 +214,14 @@ updateEmail(auth.currentUser, newEmail).then(() => {
 }
 
 function changeUsername(newUsername){
-const auth = getAuth();
-const uid = auth.currentUser.uid;
+    const auth = getAuth();
+    const uid = auth.currentUser.uid;
 
-const usernameUpdate = {};
-usernameUpdate['/playerGameData/' + uid + "/username"] = newUsername;
-usernameUpdate['/playerProfileData/' + uid + "/username"] = newUsername;
-usernameUpdate['/players/' + uid + "/username"] = newUsername;
-return update(ref(db), usernameUpdate);
+    const usernameUpdate = {};
+    usernameUpdate['/playerGameData/' + uid + "/username"] = newUsername;
+    usernameUpdate['/playerProfileData/' + uid + "/username"] = newUsername;
+    usernameUpdate['/players/' + uid + "/username"] = newUsername;
+    return update(ref(db), usernameUpdate);
 }
 
 if (changeEmailButton){
@@ -298,6 +312,9 @@ if (createCompanyButton){
 
         const companyName = document.getElementById("companyNameInput").value;
         const companyId = document.getElementById("companyIdInput").value;
-        createCompany(companyName, companyId);
+
+        const user = auth.currentUser;
+        const databaseId = user.uid;
+        createCompany(companyName, companyId, databaseId);
     });
 };

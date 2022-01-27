@@ -14,5 +14,5 @@ function Company(companyName, companyId, employeeList){
 }
 
 function employeeList(userId){
-    this.userId = [userId];
+    this.userId = userId;
 }
