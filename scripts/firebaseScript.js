@@ -26,16 +26,24 @@ var resetPasswordButton = document.getElementById("resetPasswordButton");
 var usernamePlace = document.getElementById("dropdownMenuButton");
 var changeEmailButton = document.getElementById("newEmailConfirmBtn");
 var changeUsernameButton = document.getElementById("newUsernameConfirmBtn");
+var createCompanyCheck = document.getElementById("createCompany");
 
 // Functions
-function signUpUser(email, username, password, authType, userId, companyId){
+function signUpUser(email, username, password, authType, userId){
     setPersistence(auth, authType)
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         // Signed in 
         var user = userCredential.user;
         //Calls function to create a new user profile for realtimeDB
-        writeUserData(email, username, userId, companyId, userId.uid);
+        writeUserData(email, username, userId, user.uid);
+
+        if (createCompanyCheck.checked){  // check if user is creating account with new company or just account
+            //open create company page
+
+        } else {
+            //open homepage menu
+        }
         return;
     })
     .catch((error) => {
@@ -96,11 +104,11 @@ sendPasswordResetEmail(auth, email)
 }
 
 //function for writing user data into the realtimeDB
-function writeUserData(email, username, userId, companyId, databaseId) {
-  let newUser = new User(email, username, userId, companyId, databaseId);
+function writeUserData(email, username, userId, databaseId) {
+  let newUser = new User(email, username, userId, databaseId);
 
   //sets profile data
-  set(ref(db, 'players/' + databaseId), newUser)
+  set(ref(db, 'users/' + databaseId), newUser)
   .then(()=>{
       console.log("User data written successfully");
   })
@@ -230,9 +238,9 @@ signUpButton.addEventListener("click", function(x){
   const passwordInput = document.getElementById("passwordInput").value;
   const usernameInput = document.getElementById("usernameInput").value;
   const userIdInput = document.getElementById("userIdInput").value;
-  const companyIdInput = document.getElementById("companyIdInput").value;
+
   console.log("Email: " + emailInput + " Password: " + passwordInput + " Username: " + usernameInput);
-  signUpUser(emailInput, usernameInput, passwordInput, authType, userIdInput, companyIdInput);
+  signUpUser(emailInput, usernameInput, passwordInput, authType, userIdInput);
   console.log("Signing up user...")
 })
 }
