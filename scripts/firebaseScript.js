@@ -27,6 +27,7 @@ var usernamePlace = document.getElementById("dropdownMenuButton");
 var changeEmailButton = document.getElementById("newEmailConfirmBtn");
 var changeUsernameButton = document.getElementById("newUsernameConfirmBtn");
 var createCompanyCheck = document.getElementById("createCompany");
+var createCompanyButton = document.getElementById("createCompanyButton");
 
 // Functions
 function signUpUser(email, username, password, authType, userId){
@@ -115,7 +116,12 @@ function writeUserData(email, username, userId, databaseId) {
   .catch((error)=>{
       console.log("Error uploading data!");
   });
+}
 
+function createCompany(companyName, companyId){
+    //check if ID or Name already exist,
+    //if not, create new company, add current user then open alert and go to homepage
+    //if yes, return alert error
 }
 
 // Event listeners
@@ -284,4 +290,14 @@ if (resetPasswordButton){
       forgotPassword(emailInput);
     }
   })
+};
+
+if (createCompanyButton){
+    createCompanyButton.addEventListener("click", function(x){
+        x.preventDefault();
+
+        const companyName = document.getElementById("companyNameInput").value;
+        const companyId = document.getElementById("companyIdInput").value;
+        createCompany(companyName, companyId);
+    });
 };
