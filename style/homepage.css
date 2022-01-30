@@ -1,0 +1,139 @@
+.sidebar-container {
+    position: fixed;
+    width: 20%;
+    height: 100%;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 1.2rem;
+  }
+  
+  .content-container {
+    padding-top: 20px;
+  }
+  
+  .sidebar-logo {
+    padding: 10px 15px 10px 30px;
+    font-size: 20px;
+    background-color: rgb(62, 139, 62);
+    font-weight: 600;
+  }
+  
+  .sidebar-navigation {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    position: relative;
+  }
+  
+  .sidebar-navigation li {
+    background-color: transparent;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    line-height: 20px;
+  }
+  
+  .sidebar-navigation li a {
+    padding: 10px 15px 10px 30px;
+    display: block;
+    color: #fff;
+  }
+  
+  .sidebar-navigation li .fa {
+    margin-right: 10px;
+  }
+  
+  .sidebar-navigation li a:active,
+  .sidebar-navigation li a:hover,
+  .sidebar-navigation li a:focus {
+    text-decoration: none;
+    outline: none;
+  }
+  
+  .sidebar-navigation li::before {
+    background-color: rgb(62, 139, 62);
+    position: absolute;
+    content: '';
+    height: 100%;
+    left: 0;
+    top: 0;
+    -webkit-transition: width 0.2s ease-in;
+    transition: width 0.2s ease-in;
+    width: 3px;
+    z-index: -1;
+  }
+  
+  .sidebar-navigation li:hover::before {
+    width: 100%;
+  }
+  
+  .sidebar-navigation .header {
+    font-size: 12px;
+    text-transform: uppercase;
+    background-color: #151515;
+    padding: 10px 15px 10px 30px;
+  }
+  
+  .sidebar-navigation .header::before {
+    background-color: transparent;
+  }
+
+  #mainBody{
+    position: absolute;
+    width: 80%;
+    left: 20%;
+  }
+
+  #onlineUsers{
+      vertical-align: middle;
+      background-color: white;
+      box-shadow: 2px 5px 15px 5px #dfdfdf;
+      width: 50%;
+      padding: 20px;
+      border-radius: 10px;
+      color: rgb(62, 139, 62);
+      font-size: 1.5rem;
+      font-weight: 700;
+  }
+
+  .dropdown{
+      text-align: end;
+  }
+
+  .dropdown-item{
+      font-size: 1.4rem;
+  }
+
+  #dropdownMenuButton{
+    padding: 20px;
+    font-size: 1.5rem;
+    text-align: left;
+    border-radius: 10px;
+    background-color: white;
+    font-weight: 700;
+    border-color: transparent;
+    color: black;
+    box-shadow: 2px 5px 15px 5px #dfdfdf;
+
+  }
+
+  #searchInputs{
+    font-size:1.5rem;
+  }
+
+  .card-body.text {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  #promoteAdminDiv{
+    display: none;
+  }
+
+  #demoteAdminDiv{
+    display: none;
+  }
+

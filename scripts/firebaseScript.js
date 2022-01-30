@@ -30,13 +30,13 @@ var createCompanyCheck = document.getElementById("createCompany");
 var createCompanyButton = document.getElementById("createCompanyButton");
 
 // Functions
-function signUpUser(email, username, password, authType, userId){
+function signUpUser(email, username, password, authType){
     setPersistence(auth, authType)
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         //Runs if user logged in
         var user = userCredential.user; 
-        writeUserData(email, username, userId, user.uid); //Calls function to create a new user profile for realtimeDB
+        writeUserData(email, username, user.uid); //Calls function to create a new user profile for realtimeDB
         return;
     })
     .catch((error) => {
@@ -58,7 +58,7 @@ function loginUser(email, password, authType){
         const dbref = ref(db);
 
         //change webpage to homepage
-
+        window.location.href = "homepage.html";
     })
     .catch((error) => {
         const errorCode = error.code;
@@ -97,8 +97,8 @@ sendPasswordResetEmail(auth, email)
 }
 
 //function for writing user data into the realtimeDB
-function writeUserData(email, username, userId, databaseId) {
-  let newUser = new User(email, username, userId, databaseId);
+function writeUserData(email, username, databaseId) {
+  let newUser = new User(email, username, databaseId);
 
   //sets profile data
   set(ref(db, 'users/' + databaseId), newUser)
@@ -147,7 +147,7 @@ if (user) {
   console.log(uid);
   if (usernamePlace != null){
     const dbref = ref(db);
-    get(child(dbref, "players/" + uid)).then((snapshot)=>{
+    get(child(dbref, "users/" + uid)).then((snapshot)=>{
       if(snapshot.exists()){
         const username = snapshot.val().username;
         $("#dropdownMenuButton").text(username);
@@ -162,34 +162,10 @@ if (user) {
   var page = path. split("/"). pop();
   console.log(page);
   if(page == "index.html"){
-    const dbref = ref(db);
-    //checks if logged in user is admin or user
-    get(child(dbref, "players/" + user.uid)).then((snapshot)=>{
-      if(snapshot.exists()){
-        if(snapshot.val().admin){
-          console.log("user logged in in admin");
-          window.location.href = "html/adminPages/adminHomepage.html"
-          
-        } else {
-          console.log("user logged in is not admin");
-          window.location.href = "html/userPages/userHomepage.html"
-        }
-      }
-    });
+    window.location.href = "html/homepage.html"
   } 
-  if(page == "signUp.html"){
-    get(child(dbref, "players/" + user.uid)).then((snapshot)=>{
-      if(snapshot.exists()){
-        if(snapshot.val().admin){
-          console.log("user logged in in admin");
-          window.location.href = "../html/adminPages/adminHomepage.html"
-          
-        } else {
-          console.log("user logged in is not admin");
-          window.location.href = "../html/adminPages/userHomepage.html"
-        }
-      }
-    });
+  if(page == "signup.html"){
+    window.location.href = "html/homepage.html"
   }
 } else {
   // User is signed out
@@ -202,7 +178,7 @@ const auth = getAuth();
 updateEmail(auth.currentUser, newEmail).then(() => {
   // Email updated!
   const emailUpdate = {};
-  emailUpdate['/players/' + auth.currentUser.uid + "/email"] = newEmail;
+  emailUpdate['/users/' + auth.currentUser.uid + "/email"] = newEmail;
   update(ref(db), emailUpdate);
   // ...
   alert("Email updated!");
@@ -218,9 +194,7 @@ function changeUsername(newUsername){
     const uid = auth.currentUser.uid;
 
     const usernameUpdate = {};
-    usernameUpdate['/playerGameData/' + uid + "/username"] = newUsername;
-    usernameUpdate['/playerProfileData/' + uid + "/username"] = newUsername;
-    usernameUpdate['/players/' + uid + "/username"] = newUsername;
+    usernameUpdate['/users/' + uid + "/username"] = newUsername;
     return update(ref(db), usernameUpdate);
 }
 
@@ -257,10 +231,9 @@ signUpButton.addEventListener("click", function(x){
   const emailInput = document.getElementById("emailInput").value;
   const passwordInput = document.getElementById("passwordInput").value;
   const usernameInput = document.getElementById("usernameInput").value;
-  const userIdInput = document.getElementById("userIdInput").value;
 
   console.log("Email: " + emailInput + " Password: " + passwordInput + " Username: " + usernameInput);
-  signUpUser(emailInput, usernameInput, passwordInput, authType, userIdInput);
+  signUpUser(emailInput, usernameInput, passwordInput, authType);
   console.log("Signing up user...")
 })
 }
