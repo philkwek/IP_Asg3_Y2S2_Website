@@ -19,6 +19,7 @@ var latestProjectData; //for global usage of the current project data from db
 var pageNumber = 0; //for page number of project page
 var uid; //global user id variable
 var searchButton = document.getElementById("searchIcon");
+var projectNamesObj = [];
 
 if (searchButton){
     searchButton.addEventListener("click", function(){
@@ -38,6 +39,19 @@ onAuthStateChanged(auth, (user) => {
     } 
 });
 
+function GetLatestList(){ //gets names of all projects for search
+    const dbRef = ref(getDatabase());
+    const mostRecentProjects = query(ref(db, 'projects'), orderByChild("dateCreated"));
+    get(mostRecentProjects).then((snapshot) =>{
+        var data = snapshot.val();
+        latestProjectData = Object.values(data);
+        var projectNumber = 0;
+        for (let i=0; i<latestProjectData.length; i++){ //functions loops through all existing projects, displays first top 8
+            projectNumber += 1;
+            projectNamesObj.push(latestProjectData[i].nameOfLayout.toString());
+        };
+    })
+};
 
 
 function InsertLatestProject(){ //loads in the first 8 projects from db on first load
@@ -131,9 +145,15 @@ function nextPage(newPageNumber){ //loads projects based on page number clicked
     }
 }
 
-function SearchResults(input){
-
+function SearchResults(){
+    var input = document.getElementById("searchInput");
+    //get list of all names of layouts in a array
+    console.log(Array.isArray(projectNamesObj));
+    console.log(projectNamesObj);
+    console.log(projectNamesObj)
 }
 
 InsertLatestProject();
+GetLatestList();
+SearchResults();
 

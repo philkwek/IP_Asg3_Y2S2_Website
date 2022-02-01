@@ -128,7 +128,7 @@
         </div>
       </div>
 
-      <div class="row justify-content-between m-1 mt-4 mb-2">
+      <div class="row justify-content-between m-1 mt-4 mb-2" style="display:flex; align-items:center">
         <div class="col-4">
           <h1>Latest Projects</h1>
         </div>
@@ -139,7 +139,16 @@
 
       <div class = "row" id="searchDiv" style="display: none">
         <div class="col-12 input-group">
-          <input type="text" class="form-control" placeholder="Search for Company/Creator name/Layout name...">
+          <input id="searchInput" type="text" class="form-control" placeholder="Search for a layout name...">
+        </div>
+        <div class="col-12" id="searchSuggestions">
+          <ul class="list-group">
+            <li id="suggestions0" class="list-group-item" style="display: inline">Name 1</li>
+            <li id="suggestions1" class="list-group-item" style="display: inline">Name 2</li>
+            <li id="suggestions2" class="list-group-item" style="display: inline">Name 3</li>
+            <li id="suggestions3" class="list-group-item" style="display: inline">Name 4</li>
+            <li id="suggestions4x" class="list-group-item" style="display: inline">Name 5</li>
+          </ul>
         </div>
         <div class="col-12 mt-4" style="text-align: center;">
           <button type="button" class="btn btn-primary" style="width: 30%">Search</button>
