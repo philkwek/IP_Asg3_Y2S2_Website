@@ -2,6 +2,11 @@ h1 {
     font-weight: 900;
 }
 
+img {
+    max-width: 100%;
+    max-height: auto;
+}
+
 input {
     box-sizing: border-box;
     border-color: transparent;
@@ -14,6 +19,11 @@ input {
 input[type=text], input[type=email], input[type=password] {
     margin-top:0.5rem;
     padding: 10px;
+}
+
+span {
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 
 a:link {

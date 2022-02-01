@@ -46,8 +46,8 @@
 
     <div id="mainBody" class="container-fluid">
 
-      <div class="row m-1 mt-4 justify-content-end">
-        <div class="col-5" id="userProfile">
+      <div class="row justify-content-end m-1 mt-4">
+        <div class="col-12" id="userProfile">
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" 
             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -128,20 +128,100 @@
         </div>
       </div>
 
-      <div id="playerData">
-        <div class="row m-1 mb-0 mt-4">
-          <div class="col mb-0">
-            <div class="card shadow mb-4">
-              <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">User Email</h6>
-              </div>
-              <div id="searchEmail" class="card-body text">
-                  -email-
-              </div>
+      <div class="row justify-content-between m-1 mt-4">
+        <div class="col-4">
+          <h1>Latest Projects</h1>
+        </div>
+        <div class="col-4">
+          <img id="searchIcon" src="../resources/icons/search.png" width="40" style="float: right">
+        </div>
+      </div>
+
+      <div class = "row m-1 mt-2" id="projectGallery">
+
+        <div id="project_1" class ="col-12 col-md-6 mb-3">
+          <img src= "https://via.placeholder.com/1920x1080">
+          <div class="d-flex flex-row justify-content-between mt-2">
+            <div style="display:flex; align-items:center">
+              <span id="nameOfLayout_1">-Name of Layout-</span>
+            </div>
+            <div style="display:flex; align-items:center">
+              <span id="likesCount_1" style="margin-right: 5px">1</span>
+              <img id="coverImage_1"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
             </div>
           </div>
         </div>
+
+        <div id="project_2" class ="col-12 col-md-6 mb-3">
+          <img src= "https://via.placeholder.com/1920x1080">
+          <div class="d-flex flex-row justify-content-between mt-2">
+            <div style="display:flex; align-items:center">
+              <span id="nameOfLayout_2">-Name of Layout-</span>
+            </div>
+            <div style="display:flex; align-items:center">
+              <span id="likesCount_2" style="margin-right: 5px">1</span>
+              <img id="coverImage_2"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
+            </div>
+          </div>
+        </div>
+
+        <div id="project_3" class ="col-12 col-md-6 mb-3">
+          <img src= "https://via.placeholder.com/1920x1080">
+          <div class="d-flex flex-row justify-content-between mt-2">
+            <div style="display:flex; align-items:center">
+              <span id="nameOfLayout_3">-Name of Layout-</span>
+            </div>
+            <div style="display:flex; align-items:center">
+              <span id="likesCount_3" style="margin-right: 5px">1</span>
+              <img id="coverImage_3"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
+            </div>
+          </div>
+        </div>
+
+        <div id="project_4" class ="col-12 col-md-6 mb-3">
+          <img src= "https://via.placeholder.com/1920x1080">
+          <div class="d-flex flex-row justify-content-between mt-2">
+            <div style="display:flex; align-items:center">
+              <span id="nameOfLayout_4">-Name of Layout-</span>
+            </div>
+            <div style="display:flex; align-items:center">
+              <span id="likesCount_4" style="margin-right: 5px">1</span>
+              <img id="coverImage_4"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
+            </div>
+          </div>
+        </div>
+
+        <div id="project_5" class ="col-12 col-md-6 mb-3">
+          <img src= "https://via.placeholder.com/1920x1080">
+          <div class="d-flex flex-row justify-content-between mt-2">
+            <div style="display:flex; align-items:center">
+              <span id="nameOfLayout_5">-Name of Layout-</span>
+            </div>
+            <div style="display:flex; align-items:center">
+              <span id="likesCount_5" style="margin-right: 5px">1</span>
+              <img id="coverImage_5"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
+            </div>
+          </div>
+        </div>
+
+        <div id="project_6" class ="col-12 col-md-6 mb-3">
+          <img src= "https://via.placeholder.com/1920x1080">
+          <div class="d-flex flex-row justify-content-between mt-2">
+            <div style="display:flex; align-items:center">
+              <span id="nameOfLayout_6">-Name of Layout-</span>
+            </div>
+            <div style="display:flex; align-items:center">
+              <span id="likesCount_6" style="margin-right: 5px">1</span>
+              <img id="coverImage_6"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
+
+    
 
   </body>
   
@@ -150,5 +230,6 @@
   <script src="../script.js"></script>
   <script type="module" src = "../scripts/config.js"></script>
   <script type="module" src = "../scripts/firebaseScript.js"></script>
+  <script type="module" src = "../scripts/homepage.js"></script>
   
 </html>
