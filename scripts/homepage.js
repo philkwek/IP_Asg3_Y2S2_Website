@@ -13,7 +13,22 @@ import { getAuth, initializeAuth,
 //Reference the imports
 const auth = getAuth();
 const db = getDatabase();
+
+//References
+var latestProjectData; //for global usage of the current project data from db
+var pageNumber = 0; //for page number of project page
 var uid; //global user id variable
+var searchButton = document.getElementById("searchIcon");
+
+if (searchButton){
+    searchButton.addEventListener("click", function(){
+        if (document.getElementById("searchDiv").style.display == "inline"){
+            document.getElementById("searchDiv").style.display = "none";
+        } else {
+            document.getElementById("searchDiv").style.display = "inline";
+        }
+    })
+}
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -23,10 +38,7 @@ onAuthStateChanged(auth, (user) => {
     } 
 });
 
-//References
-var latestProjectData; //for global usage of the current project data from db
-var pageNumber = 0; //for page number of project page
-var navigation = document.getElementById("navigation");
+
 
 function InsertLatestProject(){ //loads in the first 8 projects from db on first load
     const dbRef = ref(getDatabase());
@@ -117,6 +129,10 @@ function nextPage(newPageNumber){ //loads projects based on page number clicked
         document.getElementById(likesId).innerHTML = latestProjectData[i].likes;
         //insert cover image
     }
+}
+
+function SearchResults(input){
+
 }
 
 InsertLatestProject();
