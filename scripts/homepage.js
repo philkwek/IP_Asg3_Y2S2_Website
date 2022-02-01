@@ -34,8 +34,15 @@ function InsertLatestProject(){
         var data = Object.values(data);
 
         for (let i=0; i<data.length; i++){ //functions loops through all existing projects, displays first top 8
-            console.log(data[i]);
+            var projectId = "project_" + i;
+            var nameId = "nameOfLayout_" + i;
+            var likesId = "likesCount_" + i;
+            var imageId = "coverImage_" + i;
 
+            document.getElementById(projectId).style.display = "inline";
+            document.getElementById(nameId).innerHTML = data[i].nameOfLayout;
+            document.getElementById(likesId).innerHTML = data[i].likes;
+            //insert cover image
         }
     })
 }
