@@ -32,9 +32,8 @@ if (searchButton){
 }
 
 if (searchInput){
-    searchInput.addEventListener("keydown", function(){
-        SearchResults();
-        console.log("Keypress");
+    searchInput.addEventListener("keydown", function(){ //runs whenever a key is pressed to print suggestions
+        SearchResults(); 
     })
 }
 
@@ -111,8 +110,6 @@ function InsertLatestProject(){ //loads in the first 8 projects from db on first
 }
 
 function nextPage(newPageNumber){ //loads projects based on page number clicked
-    console.log("clicked")
-
     for (let i=0; i<6; i++){ //functions loops through all existing projects, displays that pages 8
         //creates reference IDs for innerHTML insertion of data
         var projectId = "project_" + i;
@@ -159,20 +156,20 @@ function SearchResults(){
         var suggestionId = "suggestions" + i;
         document.getElementById(suggestionId).style.display = "none";
     }
-    if (input != ""){
+    if (input != ""){ //ensures suggestions are only given on inputs that are not empty
         var suggestionBoxUsed = -1;
-        for (let i=0; i<latestProjectData.length; i++) { //checks array if input exists
+        for (let i=0; i<latestProjectData.length; i++) { //loops through data object 
             var a = latestProjectData[i].nameOfLayout;
             if (suggestionBoxUsed > 3){
                 break; //breaks loop when all 5 suggestion boxes has been used
             }
-            if(a.toUpperCase().indexOf(input) > -1){
-                suggestionBoxUsed += 1;
+            if(a.toUpperCase().indexOf(input) > -1){ //checks if input is in the currently looped object (nameOfLayout)
+                suggestionBoxUsed += 1; 
                 var suggestionId = "suggestions" + suggestionBoxUsed;
                 document.getElementById(suggestionId).innerHTML = a;
                 document.getElementById(suggestionId).style.display = "inline";
             } else {
-                continue
+                continue //if not, continue until all 5 suggestions boxes are used or when there are no more object names
             }
         }
     }
