@@ -66,6 +66,7 @@ function InsertLatestProject(){ //loads in the first 8 projects from db on first
     get(mostRecentProjects).then((snapshot) =>{
         var data = snapshot.val();
         latestProjectData = Object.values(data);
+        localStorage.setItem("latestProjectData", JSON.stringify(latestProjectData));
         var projectNumber = 0;
         for (let i=0; i<latestProjectData.length; i++){ //functions loops through all existing projects, displays first top 8
             projectNumber += 1;
@@ -79,6 +80,9 @@ function InsertLatestProject(){ //loads in the first 8 projects from db on first
             var imageId = "coverImage_" + i;
 
             document.getElementById(projectId).style.display = "inline";
+            document.getElementById(projectId).addEventListener("click", function(){
+                ViewProject(i);
+            });
             document.getElementById(nameId).innerHTML = latestProjectData[i].nameOfLayout;
             document.getElementById(likesId).innerHTML = latestProjectData[i].likes;
             //insert cover image
@@ -143,6 +147,9 @@ function nextPage(newPageNumber){ //loads projects based on page number clicked
         var imageId = "coverImage_" + loopCount;
 
         document.getElementById(projectId).style.display = "inline";
+        document.getElementById(projectId).addEventListener("click", function(){
+            ViewProject(i);
+        });
         document.getElementById(nameId).innerHTML = latestProjectData[i].nameOfLayout;
         document.getElementById(likesId).innerHTML = latestProjectData[i].likes;
         //insert cover image
@@ -173,6 +180,11 @@ function SearchResults(){
             }
         }
     }
+}
+
+function ViewProject(projectArrayId){
+    localStorage.setItem("projectArrayId", projectArrayId); //store viewprojectid into localstorage to be retrieved when viewProject.html opens 
+    window.location = "../html/viewProject.html";
 }
 
 InsertLatestProject();
