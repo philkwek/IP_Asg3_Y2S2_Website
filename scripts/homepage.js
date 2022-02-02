@@ -19,7 +19,7 @@ var latestProjectData; //for global usage of the current project data from db
 var pageNumber = 0; //for page number of project page
 var uid; //global user id variable
 var searchButton = document.getElementById("searchIcon");
-var projectNamesObj = [];
+var searchInput = document.getElementById("searchInput");
 
 if (searchButton){
     searchButton.addEventListener("click", function(){
@@ -28,6 +28,13 @@ if (searchButton){
         } else {
             document.getElementById("searchDiv").style.display = "inline";
         }
+    })
+}
+
+if (searchInput){
+    searchInput.addEventListener("keydown", function(){
+        SearchResults();
+        console.log("Keypress");
     })
 }
 
@@ -48,7 +55,7 @@ function GetLatestList(){ //gets names of all projects for search
         var projectNumber = 0;
         for (let i=0; i<latestProjectData.length; i++){ //functions loops through all existing projects, displays first top 8
             projectNumber += 1;
-            projectNamesObj.push(latestProjectData[i].nameOfLayout.toString());
+            //projectNamesObj.push(latestProjectData[i].nameOfLayout.toString());
         };
     })
 };
@@ -147,10 +154,28 @@ function nextPage(newPageNumber){ //loads projects based on page number clicked
 
 function SearchResults(){
     var input = document.getElementById("searchInput");
-    //get list of all names of layouts in a array
-    console.log(Array.isArray(projectNamesObj));
-    console.log(projectNamesObj);
-    console.log(projectNamesObj)
+    input = input.value.toUpperCase(); //converts input to all upper case, making the search none case-senstive
+    for (let i=0; i<5; i++){    //hides all currently shown suggestions
+        var suggestionId = "suggestions" + i;
+        document.getElementById(suggestionId).style.display = "none";
+    }
+    if (input != ""){
+        var suggestionBoxUsed = -1;
+        for (let i=0; i<latestProjectData.length; i++) { //checks array if input exists
+            var a = latestProjectData[i].nameOfLayout;
+            if (suggestionBoxUsed > 3){
+                break; //breaks loop when all 5 suggestion boxes has been used
+            }
+            if(a.toUpperCase().indexOf(input) > -1){
+                suggestionBoxUsed += 1;
+                var suggestionId = "suggestions" + suggestionBoxUsed;
+                document.getElementById(suggestionId).innerHTML = a;
+                document.getElementById(suggestionId).style.display = "inline";
+            } else {
+                continue
+            }
+        }
+    }
 }
 
 InsertLatestProject();
