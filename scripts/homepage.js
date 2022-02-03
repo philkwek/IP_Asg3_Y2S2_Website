@@ -174,6 +174,9 @@ function SearchResults(){
                 suggestionBoxUsed += 1; 
                 var suggestionId = "suggestions" + suggestionBoxUsed;
                 document.getElementById(suggestionId).innerHTML = a;
+                document.getElementById(suggestionId).addEventListener("click", function(){
+                    ViewProject(i);
+                })
                 document.getElementById(suggestionId).style.display = "inline";
             } else if (i == latestProjectData.length - 1  && suggestionBoxUsed == -1){
                 console.log("no suggestions");
