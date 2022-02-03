@@ -162,10 +162,25 @@
       <div class="row m-1 mt-1 justify-content-center">
         <div class="col" style="display: flex; justify-content: end; align-items: center;">
           <span id="likesCount" class="viewProjectLikes">0</span>
-          <img id="backIcon" src="../resources/icons/like.png" width="40">
+          <button id="modalActivate" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img id="likeIcon" src="../resources/icons/like.png" width="40"></button>
         </div>
       </div>
 
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Confirm Like?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Like Project</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <div class="row m-1 mt-4">
         <div class="col">
           <p class="viewProjectDetails">Date Created: <span class="viewProjectDetails" id="creationDate"></span></p>

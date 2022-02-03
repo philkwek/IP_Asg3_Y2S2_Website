@@ -23,6 +23,14 @@ if (backButton){
     })
 }
 
+function LikeProject(layoutName){
+    console.log(layoutName);
+}
+
+function OpenLikeMenu(){
+    console.log('clicked')
+}
+
 function GetViewProject(){
     var projectId = localStorage.getItem("projectArrayId");
     var latestProjectData = JSON.parse(localStorage.getItem("latestProjectData"));
@@ -30,6 +38,7 @@ function GetViewProject(){
     //reference html data points
     var projectTitle = document.getElementById("projectNameTitle");
     var likesCount = document.getElementById("likesCount");
+    var likeButton = document.getElementById("likeIcon");
     var creationDate = document.getElementById("creationDate");
     var creatorName = document.getElementById("creatorName");
     var companyName = document.getElementById("companyName");
@@ -39,6 +48,10 @@ function GetViewProject(){
 
     projectTitle.innerHTML = latestProjectData[projectId].nameOfLayout;
     likesCount.innerHTML = latestProjectData[projectId].likes;
+    likeButton.addEventListener("click", function(){
+        //LikeProject(latestProjectData[projectId].nameOfLayout);
+        OpenLikeMenu();
+    })
     creationDate.innerHTML = latestProjectData[projectId].dateCreated;
     creatorName.innerHTML = latestProjectData[projectId].creator;
     companyName.innerHTML = latestProjectData[projectId].companyId;

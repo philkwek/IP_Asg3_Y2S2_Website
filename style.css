@@ -93,3 +93,8 @@ a:link {
     height: 46spx;
     margin-top: 3rem;
 }
+
+#modalActivate{
+    border-color: transparent;
+    background-color: transparent;
+}
