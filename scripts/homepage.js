@@ -84,7 +84,7 @@ function InsertLatestProject(){ //loads in the first 8 projects from db on first
                 ViewProject(i);
             });
             document.getElementById(nameId).innerHTML = latestProjectData[i].nameOfLayout;
-            document.getElementById(likesId).innerHTML = latestProjectData[i].likes;
+            document.getElementById(likesId).innerHTML = latestProjectData[i].likes.length;
             //insert cover image
         }
 
@@ -151,7 +151,7 @@ function nextPage(newPageNumber){ //loads projects based on page number clicked
             ViewProject(i);
         });
         document.getElementById(nameId).innerHTML = latestProjectData[i].nameOfLayout;
-        document.getElementById(likesId).innerHTML = latestProjectData[i].likes;
+        document.getElementById(likesId).innerHTML = latestProjectData[i].likes.length;
         //insert cover image
     }
 }
@@ -175,8 +175,13 @@ function SearchResults(){
                 var suggestionId = "suggestions" + suggestionBoxUsed;
                 document.getElementById(suggestionId).innerHTML = a;
                 document.getElementById(suggestionId).style.display = "inline";
-            } else {
-                continue //if not, continue until all 5 suggestions boxes are used or when there are no more object names
+            } else if (i == latestProjectData.length - 1  && suggestionBoxUsed == -1){
+                console.log("no suggestions");
+                suggestionBoxUsed += 1; 
+                var suggestionId = "suggestions" + suggestionBoxUsed;
+                document.getElementById(suggestionId).innerHTML = "No results found";
+                document.getElementById(suggestionId).style.display = "inline";
+                break //if not, continue until all 5 suggestions boxes are used or when there are no more object names
             }
         }
     }
