@@ -123,9 +123,7 @@ function createCompany(companyName, companyId, databaseId){
       if(snapshot.exists()){
         alert("Company ID already exists! Please change to a different ID.");
       } else {  
-          console.log(databaseId);
-          let newEmployeeList = new employeeList(databaseId);
-          let newCompany = new Company(companyName, companyId, newEmployeeList)
+          let newCompany = new Company(companyName, companyId, databaseId)
           set(ref(db, 'company/' + companyId), newCompany);
 
           const companyIdUpdate = {};
