@@ -16,6 +16,7 @@ const db = getDatabase();
 
 //References
 var latestProjectData; //for global usage of the current project data from db
+var projectKeysArray; //array of all the project ids
 var pageNumber = 0; //for page number of project page
 var uid; //global user id variable
 var searchButton = document.getElementById("searchIcon");
@@ -66,7 +67,8 @@ function InsertLatestProject(){ //loads in the first 8 projects from db on first
     get(mostRecentProjects).then((snapshot) =>{
         var data = snapshot.val();
         latestProjectData = Object.values(data);
-        localStorage.setItem("latestProjectData", JSON.stringify(latestProjectData));
+        projectKeysArray = Object.keys(data);
+        localStorage.setItem("latestProjectData", JSON.stringify(data));
         var projectNumber = 0;
         for (let i=0; i<latestProjectData.length; i++){ //functions loops through all existing projects, displays first top 8
             projectNumber += 1;
@@ -191,7 +193,8 @@ function SearchResults(){
 }
 
 function ViewProject(projectArrayId){
-    localStorage.setItem("projectArrayId", projectArrayId); //store viewprojectid into localstorage to be retrieved when viewProject.html opens 
+    var viewProjectKey = projectKeysArray[projectArrayId];
+    localStorage.setItem("viewProjectKey", viewProjectKey); //store viewprojectid into localstorage to be retrieved when viewProject.html opens 
     window.location = "../html/viewProject.html";
 }
 

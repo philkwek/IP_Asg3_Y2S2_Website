@@ -32,15 +32,11 @@ onAuthStateChanged(auth, (user) => {
     } 
 });
 
-function LikeProject(layoutName){
+function LikeProject(viewProjectKey){
     var newLikeCount = 0;
     var latestProjectData = JSON.parse(localStorage.getItem("latestProjectData"));
-    for (let i=0; i<latestProjectData.length; i++){ //gets correct like array from saved data
-        if(latestProjectData[i].nameOfLayout == layoutName){
-            newLikeCount = latestProjectData[i].likes;
-            break
-        } 
-    };
+    var viewData = latestProjectData[viewProjectKey];
+    newLikeCount = viewData.likes;
 
     var likedPost = false;
     for (let i=0; i<newLikeCount.length; i++){
@@ -55,7 +51,7 @@ function LikeProject(layoutName){
     } else {
         newLikeCount.push(uid);
         const likeCountUpdate = {};
-        likeCountUpdate['/projects/' + layoutName + "/likes"] = newLikeCount;
+        likeCountUpdate['/projects/' + viewProjectKey + "/likes"] = newLikeCount;
         update(ref(db), likeCountUpdate);
         document.getElementById("likesCount").innerHTML = newLikeCount.length;
     }
@@ -66,8 +62,9 @@ function OpenLikeMenu(){
 }
 
 function GetViewProject(){
-    var projectId = localStorage.getItem("projectArrayId");
+    var projectKey = localStorage.getItem("viewProjectKey");
     var latestProjectData = JSON.parse(localStorage.getItem("latestProjectData"));
+    var viewData = latestProjectData[projectKey];
 
     //reference html data points
     var projectTitle = document.getElementById("projectNameTitle");
@@ -80,20 +77,20 @@ function GetViewProject(){
     var bedroomCount = document.getElementById("bedroomsCount");
     var furnituresUsed = document.getElementById("furnituresUsed");
 
-    projectTitle.innerHTML = latestProjectData[projectId].nameOfLayout;
-    likesCount.innerHTML = latestProjectData[projectId].likes.length;
+    projectTitle.innerHTML = viewData.nameOfLayout;
+    likesCount.innerHTML = viewData.likes.length;
     likeButton.addEventListener("click", function(){
         //LikeProject(latestProjectData[projectId].nameOfLayout);
         OpenLikeMenu();
     })
     confirmLike.addEventListener("click", function(){
-        LikeProject(latestProjectData[projectId].nameOfLayout);
+        LikeProject(projectKey);
     })
-    creationDate.innerHTML = latestProjectData[projectId].dateCreated;
-    creatorName.innerHTML = latestProjectData[projectId].creator;
-    companyName.innerHTML = latestProjectData[projectId].companyId;
-    bedroomCount.innerHTML = latestProjectData[projectId].noOfBedrooms;
-    furnituresUsed.innerHTML = latestProjectData[projectId].furnitureUsed;
+    creationDate.innerHTML = viewData.dateCreated;
+    creatorName.innerHTML = viewData.creator;
+    companyName.innerHTML = viewData.companyId;
+    bedroomCount.innerHTML = viewData.noOfBedrooms;
+    furnituresUsed.innerHTML = viewData.furnitureUsed;
 }
 
 GetViewProject();
