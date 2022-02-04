@@ -77,6 +77,28 @@ function GetViewProject(){
     var bedroomCount = document.getElementById("bedroomsCount");
     var furnituresUsed = document.getElementById("furnituresUsed");
 
+    //gets creator name and company name from database
+    var creatorId = viewData.creator;
+    var companyId = viewData.companyId;
+    const dbref = ref(db);
+    get(child(dbref, "users/" + creatorId)).then((snapshot)=>{ //get username from database
+        if(snapshot.exists()){
+          const username = snapshot.val().username;
+          creatorName.innerHTML = username;
+        } else {
+          console.log("Not found");
+        }
+    });
+
+    get(child(dbref, "company/" + companyId)).then((snapshot)=>{ //get company name from database
+        if(snapshot.exists()){
+          const name = snapshot.val().companyName;
+          companyName.innerHTML = name;
+        } else {
+          console.log("Not found");
+        }
+    });
+
     projectTitle.innerHTML = viewData.nameOfLayout;
     likesCount.innerHTML = viewData.likes.length;
     likeButton.addEventListener("click", function(){
@@ -87,8 +109,6 @@ function GetViewProject(){
         LikeProject(projectKey);
     })
     creationDate.innerHTML = viewData.dateCreated;
-    creatorName.innerHTML = viewData.creator;
-    companyName.innerHTML = viewData.companyId;
     bedroomCount.innerHTML = viewData.noOfBedrooms;
     furnituresUsed.innerHTML = viewData.furnitureUsed;
 }
