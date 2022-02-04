@@ -30,6 +30,37 @@ a:link {
     text-decoration: none;
 }
 
+#mainBody{
+    position: absolute;
+    width: 80%;
+    left: 20%;
+}
+
+.mobileNavBar{
+    display:none;
+    position: static;
+}
+
+@media (max-width: 930px){
+    .sidebar-container{
+        display: none;
+        position: static;
+    }
+    #mainBody{
+        position: absolute;
+        width: 100%;
+        left: 0%;
+    }
+    .mobileNavBar{
+        position: flex;
+        align-items: center;
+        display: inline;
+        font-size: 1.2rem;
+        font-weight: 500;
+        vertical-align: middle;
+    }
+}
+
 .viewProjectDetails{
     font-size: 1.8rem;
     font-weight: 500;

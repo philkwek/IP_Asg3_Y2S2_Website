@@ -81,12 +81,6 @@
     background-color: transparent;
   }
 
-  #mainBody{
-    position: absolute;
-    width: 80%;
-    left: 20%;
-  }
-
   #onlineUsers{
       vertical-align: middle;
       background-color: white;
