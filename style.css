@@ -54,6 +54,34 @@ a:link {
     padding-bottom: 8px;
 }
 
+.accountProjectTitle{
+    font-size: 2.2rem;
+    font-weight: 500;
+}
+
+#profileProjectFlex{
+    display: flex;
+    flex-wrap: wrap;
+    margin:-10px;
+}
+
+#profileProjectFlex>* {
+    flex: 1 0 41%; 
+    margin: 5px;
+}
+
+@media (max-width: 1200px){
+    #profileProjectFlex{
+        display: flex;
+        flex-wrap: wrap;
+        margin:-10px;
+    }
+    
+    #profileProjectFlex>* {
+        flex: 1 0 100%; 
+    }
+}
+
 #landingTitle{
     position: absolute;
     margin-top:4%;
