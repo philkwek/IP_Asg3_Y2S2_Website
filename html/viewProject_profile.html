@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>HomeTools 3D | Homepage</title>
+    <link href="../style.css" rel="stylesheet" type="text/css"/>
+    <link href="../style/homepage.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CDN reference for jQuery min-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified js for Bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" 
+    integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+
+    <!-- CDN reference for Chart.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js"></script>
+  </head>
+
+  <body>
+
+    <div class="sidebar-container">
+      <div class="sidebar-logo">
+        HomeTools 3D        
+        <br>User Dashboard
+      </div>
+      <ul class="sidebar-navigation">
+        <li class="header">Navigation</li>
+        <li>
+          <a href="homepage.html">
+            <i class="fa fa-home" aria-hidden="true"></i> Home
+          </a>
+        </li>
+        <li>
+          <a href="account.html">
+            <i class="fa fa-home" aria-hidden="true"></i> Account
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div id="mainBody" class="container-fluid">
+
+      <div class="row justify-content-end m-1 mt-4">
+        <div class="col-12" id="userProfile">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" 
+            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Username
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#settingsModal">Settings</a>
+              <a class="dropdown-item" id="logoutButton" href="#">Log out</a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Account Settings</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex">
+                  <button type="button" class="btn btn-primary flex-fill m-2" 
+                  data-bs-toggle="modal" data-bs-target="#changeEmailModel" >Change Email</button>
+                  <button type="button" class="btn btn-success flex-fill m-2" data-bs-toggle="modal"
+                  data-bs-target="#changeUsernameModel">Change Username</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="modal fade" id="changeEmailModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Change Email Address</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label for="newEmailText" class="col-form-label">New Email:</label>
+                      <input type="text" class="form-control" id="newEmailText">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id = "newEmailConfirmBtn">Confirm Change</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="modal fade" id="changeUsernameModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Change Username</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label for="newUsernameText" class="col-form-label">New Username:</label>
+                      <input type="text" class="form-control" id="newUsernameText">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id = "newUsernameConfirmBtn">Confirm Change</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-between m-1 mt-4 mb-2" style="display:flex; align-items:center">
+        <div class="col">
+          <h1 id="projectNameTitle">Project Title</h1>
+        </div>
+        <div class="col-4">
+          <img id="backIcon_profile" src="../resources/icons/back.png" width="40" style="float: right">
+        </div>
+      </div>
+
+      <div class="row m-1 mt-3 carousel slide" id="imageCarousel" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div id="carouselDiv0" class="carousel-item active">
+            <img id="carouselImage0" src="https://via.placeholder.com/1920x1080" class="d-block w-100" alt="...">
+          </div>
+          <div id="carouselDiv1" class="carousel-item">
+            <img id="carouselImage1" src="https://via.placeholder.com/1920x1080" class="d-block w-100" alt="...">
+          </div>
+          <div id="carouselDiv2" class="carousel-item">
+            <img id="carouselImage2" src="https://via.placeholder.com/1920x1080" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <div class="row m-1 mt-1 justify-content-center">
+        <div class="col" style="display: flex; justify-content: end; align-items: center;">
+          <span id="likesCount" class="viewProjectLikes">0</span>
+          <button id="modalActivate" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img id="likeIcon" src="../resources/icons/like.png" width="40"></button>
+        </div>
+      </div>
+
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Confirm Like?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button id="confirmLike" type="button" class="btn btn-primary">Like Project</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row m-1 mt-4">
+        <div class="col">
+          <p class="viewProjectDetails">Date Created: <span class="viewProjectDetails" id="creationDate"></span></p>
+          <p class="viewProjectDetails">Creator: <span class="viewProjectDetails" id="creatorName"></span></p>
+          <p class="viewProjectDetails">Company: <span class="viewProjectDetails" id="companyName"></span></p>
+          <p class="viewProjectDetails">Number of Bedrooms: <span class="viewProjectDetails" id="bedroomsCount"></span></p>
+          <p class="viewProjectDetails">Furnitures Used: <span class="viewProjectDetails" id="furnituresUsed"></span></p>
+        </div>
+      </div>
+
+    </div>
+  </body>
+  
+  <!-- References for scripts -->
+  <script src="../scripts/objectsScript.js"></script>
+  <script src="../script.js"></script>
+  <script type="module" src = "../scripts/config.js"></script>
+  <script type="module" src = "../scripts/firebaseScript.js"></script>
+  <script type="module" src = "../scripts/viewProject.js"></script>
+  
+</html>

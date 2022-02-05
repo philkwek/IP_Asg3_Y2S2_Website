@@ -11,5 +11,5 @@ function Company(companyName, companyId, databaseId){
     this.companyName = companyName;
     this.companyId = companyId; //id format = *companyname*#0000 (manual input)
     this.employeeList = [databaseId];
-    this.projectsCreated = [];
+    this.createdProjects = [];
 }

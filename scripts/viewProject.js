@@ -17,10 +17,17 @@ var uid;
 
 //References
 var backButton = document.getElementById("backIcon");
+var backButtonProfile = document.getElementById("backIcon_profile");
 
 if (backButton){
     backButton.addEventListener("click", function(){
         window.location = "../html/homepage.html";
+    })
+}
+
+if (backButtonProfile){
+    backButtonProfile.addEventListener("click", function(){
+        window.location = "../html/account.html";
     })
 }
 
