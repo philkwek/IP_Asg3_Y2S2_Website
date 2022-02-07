@@ -35,7 +35,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 function GetProfilePicture(){ //gets profilepicture img url from db and sets attribute
-    const pathRef = sRef(storage, "Images/" + uid +"/profilePicture.jpg");
+    const pathRef = sRef(storage, "Images/userProfilePictures/" + uid +"/profilePicture.jpg");
     getDownloadURL(pathRef).then((url)=>{
         const profilePicSet = document.getElementById("profilePicture");
         profilePicSet.setAttribute('src', url);

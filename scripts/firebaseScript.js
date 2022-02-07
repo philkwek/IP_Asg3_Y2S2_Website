@@ -206,7 +206,7 @@ function changeUsername(newUsername){
 
 function UploadImage(){
   if (imageUploaded){ //checks to ensure that user has selected a img for upload
-      const storageRef = sRef(storage, "Images/"+uid+"/"+"profilePicture.jpg");
+      const storageRef = sRef(storage, "Images/userProfilePictures/"+uid+"/"+"profilePicture.jpg");
       uploadBytes(storageRef, imageUploaded).then((snapshot) => {
           alert("Uploaded File!");
           location.reload();
@@ -218,7 +218,7 @@ function UploadImage(){
 }
 
 function DeleteProfilePicture(){
-  const pathRef = sRef(storage, "Images/" + uid +"/profilePicture.jpg");
+  const pathRef = sRef(storage, "Images/userProfilePictures/" + uid +"/profilePicture.jpg");
   deleteObject(pathRef).then(() =>{
       alert("Removed Profile Picture");
   }).catch((error) => {

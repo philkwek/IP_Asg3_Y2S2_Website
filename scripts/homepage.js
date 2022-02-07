@@ -86,7 +86,9 @@ function InsertLatestProject(){ //loads in the first 8 projects from db on first
                 ViewProject(i);
             });
             document.getElementById(nameId).innerHTML = latestProjectData[i].nameOfLayout;
-            document.getElementById(likesId).innerHTML = latestProjectData[i].likes.length;
+            if(latestProjectData[i].likes){
+                document.getElementById(likesId).innerHTML = latestProjectData[i].likes.length;
+            }
             //insert cover image
         }
 

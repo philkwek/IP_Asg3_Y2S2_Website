@@ -40,11 +40,16 @@ onAuthStateChanged(auth, (user) => {
 });
 
 function LikeProject(viewProjectKey){
-    var newLikeCount = 0;
+    var newLikeCount;
     var latestProjectData = JSON.parse(localStorage.getItem("latestProjectData"));
     var viewData = latestProjectData[viewProjectKey];
-    newLikeCount = viewData.likes;
 
+    if(viewData.likes){
+        newLikeCount = viewData.likes;
+    } else {
+        newLikeCount = [];
+    }
+    
     var likedPost = false;
     for (let i=0; i<newLikeCount.length; i++){
         if (newLikeCount[i] == uid){
@@ -90,24 +95,26 @@ function GetViewProject(){
     const dbref = ref(db);
     get(child(dbref, "users/" + creatorId)).then((snapshot)=>{ //get username from database
         if(snapshot.exists()){
-          const username = snapshot.val().username;
-          creatorName.innerHTML = username;
+            const username = snapshot.val().username;
+            creatorName.innerHTML = username;
         } else {
-          console.log("Not found");
+            creatorName.innerHTML = "Unknown Creator";
         }
     });
 
     get(child(dbref, "company/" + companyId)).then((snapshot)=>{ //get company name from database
         if(snapshot.exists()){
-          const name = snapshot.val().companyName;
-          companyName.innerHTML = name;
+            const name = snapshot.val().companyName;
+            companyName.innerHTML = name;
         } else {
-          console.log("Not found");
+            companyName.innerHTML = "None";
         }
     });
 
     projectTitle.innerHTML = viewData.nameOfLayout;
-    likesCount.innerHTML = viewData.likes.length;
+    if (viewData.likes){
+        likesCount.innerHTML = viewData.likes.length;
+    }
     likeButton.addEventListener("click", function(){
         //LikeProject(latestProjectData[projectId].nameOfLayout);
         OpenLikeMenu();
