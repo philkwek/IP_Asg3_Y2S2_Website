@@ -9,16 +9,35 @@ import { getAuth, initializeAuth,
     browserLocalPersistence,
     sendPasswordResetEmail,
     updateEmail, } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js";
+import {getStorage, ref as sRef, uploadBytesResumable, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js";
 
 //Reference the imports
 const auth = getAuth();
 const db = getDatabase();
+const storage = getStorage();
 
 //References
 var uid;
 var projectKeysArray;
 var profileProjectData;
 var pageNumber = 0; //for page number of project page
+
+var reader = new FileReader();
+var imageInput = document.getElementById("profilePictureUpload");
+var imageUploadBtn = document.getElementById("newProfilePictureConfirm");
+var imageUploaded;
+
+if (imageInput){
+    imageInput.addEventListener("change", function(){
+        imageUploaded = imageInput.files[0];
+        console.log("Image name uploaded is: " + imageUploaded.name);
+    })
+}
+if (imageUploadBtn){
+    imageUploadBtn.addEventListener("click", function(){
+        UploadImage();
+    })
+}
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -29,6 +48,18 @@ onAuthStateChanged(auth, (user) => {
       // ...
     } 
 });
+
+function UploadImage(){
+    if (imageUploaded){
+        const storageRef = sRef(storage, "Images/"+uid+"/"+"profilePicture");
+        uploadBytes(storageRef, imageUploaded).then((snapshot) => {
+            alert("Uploaded File!");
+        })
+
+    } else {
+        alert("You have not selected a image!")
+    }
+}
 
 function GetUserData(){
     const dbref = ref(db);

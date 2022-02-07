@@ -11,7 +11,8 @@
     browserLocalPersistence,
     sendPasswordResetEmail,
     updateEmail, } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js";
-import { getDatabase, ref, child, set, update, remove, get, orderByChild } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"
+import { getDatabase, ref, child, set, update, remove, get, orderByChild } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js";
+import {getStorage, ref as sRef, uploadBytesResumable, getDownloadURL} from "https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js";
 
 //Reference the imports
 const auth = getAuth();

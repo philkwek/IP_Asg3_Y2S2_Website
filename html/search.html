@@ -139,69 +139,114 @@
       </div>
 
       <div class="row justify-content-between m-1 mt-4 mb-2" style="display:flex; align-items:center">
-        <div class="col">
-          <h1 id="projectNameTitle">Project Title</h1>
-        </div>
         <div class="col-4">
-          <img id="backIcon" src="../resources/icons/back.png" width="40" style="float: right">
+          <h1>Search</h1>
         </div>
       </div>
 
-      <div class="row m-1 mt-3 carousel slide" id="imageCarousel" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div id="carouselDiv0" class="carousel-item active">
-            <img id="carouselImage0" src="https://via.placeholder.com/1920x1080" class="d-block w-100" alt="...">
-          </div>
-          <div id="carouselDiv1" class="carousel-item">
-            <img id="carouselImage1" src="https://via.placeholder.com/1920x1080" class="d-block w-100" alt="...">
-          </div>
-          <div id="carouselDiv2" class="carousel-item">
-            <img id="carouselImage2" src="https://via.placeholder.com/1920x1080" class="d-block w-100" alt="...">
-          </div>
+      <div class = "row" id="searchDiv" style="display: inline">
+        <div class="col-12 input-group">
+          <input id="searchInput" type="text" class="form-control" placeholder="Search for a layout name...">
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-
-      <div class="row m-1 mt-1 justify-content-center">
-        <div class="col" style="display: flex; justify-content: end; align-items: center;">
-          <span id="likesCount" class="viewProjectLikes">0</span>
-          <button id="modalActivate" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img id="likeIcon" src="../resources/icons/like.png" width="40"></button>
+        <div class="col-12" id="searchSuggestions">
+          <ul class="list-group">
+            <li id="suggestions0" class="suggestionBox list-group-item">Name 1</li>
+            <li id="suggestions1" class="suggestionBox list-group-item">Name 2</li>
+            <li id="suggestions2" class="suggestionBox list-group-item">Name 3</li>
+            <li id="suggestions3" class="suggestionBox list-group-item">Name 4</li>
+            <li id="suggestions4" class="suggestionBox list-group-item">Name 5</li>
+          </ul>
         </div>
       </div>
 
-      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Confirm Like?</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class = "row m-1 mt-1" id="projectGallery">
+
+        <div id="project_0" class ="col-12 col-md-6 mb-3" style="display: none">
+          <img src= "https://via.placeholder.com/1920x1080">
+          <div class="d-flex flex-row justify-content-between mt-2">
+            <div style="display:flex; align-items:center">
+              <span id="nameOfLayout_0">-Name of Layout-</span>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button id="confirmLike" type="button" class="btn btn-primary">Like Project</button>
+            <div style="display:flex; align-items:center">
+              <span id="likesCount_0" style="margin-right: 5px; margin-left: 8px;">0</span>
+              <img id="coverImage_0"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
             </div>
           </div>
         </div>
-      </div>
-      
-      <div class="row m-1 mt-4">
-        <div class="col">
-          <p class="viewProjectDetails">Date Created: <span class="viewProjectDetails" id="creationDate"></span></p>
-          <p class="viewProjectDetails">Creator: <span class="viewProjectDetails" id="creatorName"></span></p>
-          <p class="viewProjectDetails">Company: <span class="viewProjectDetails" id="companyName"></span></p>
-          <p class="viewProjectDetails">Number of Bedrooms: <span class="viewProjectDetails" id="bedroomsCount"></span></p>
-          <p class="viewProjectDetails">Furnitures Used: <span class="viewProjectDetails" id="furnituresUsed"></span></p>
+
+        <div id="project_1" class ="col-12 col-md-6 mb-3" style="display: none">
+          <img src= "https://via.placeholder.com/1920x1080">
+          <div class="d-flex flex-row justify-content-between mt-2">
+            <div style="display:flex; align-items:center">
+              <span id="nameOfLayout_1">-Name of Layout-</span>
+            </div>
+            <div style="display:flex; align-items:center">
+              <span id="likesCount_1" style="margin-right: 5px; margin-left: 8px;">0</span>
+              <img id="coverImage_1"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
+            </div>
+          </div>
         </div>
+
+        <div id="project_2" class ="col-12 col-md-6 mb-3" style="display: none">
+          <img src= "https://via.placeholder.com/1920x1080">
+          <div class="d-flex flex-row justify-content-between mt-2">
+            <div style="display:flex; align-items:center">
+              <span id="nameOfLayout_2">-Name of Layout-</span>
+            </div>
+            <div style="display:flex; align-items:center">
+              <span id="likesCount_2" style="margin-right: 5px; margin-left: 8px;">0</span>
+              <img id="coverImage_2"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
+            </div>
+          </div>
+        </div>
+
+        <div id="project_3" class ="col-12 col-md-6 mb-3" style="display: none">
+          <img src= "https://via.placeholder.com/1920x1080">
+          <div class="d-flex flex-row justify-content-between mt-2">
+            <div style="display:flex; align-items:center">
+              <span id="nameOfLayout_3">-Name of Layout-</span>
+            </div>
+            <div style="display:flex; align-items:center">
+              <span id="likesCount_3" style="margin-right: 5px; margin-left: 8px;">0</span>
+              <img id="coverImage_3"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
+            </div>
+          </div>
+        </div>
+
+        <div id="project_4" class ="col-12 col-md-6 mb-3" style="display: none">
+          <img src= "https://via.placeholder.com/1920x1080">
+          <div class="d-flex flex-row justify-content-between mt-2">
+            <div style="display:flex; align-items:center">
+              <span id="nameOfLayout_4">-Name of Layout-</span>
+            </div>
+            <div style="display:flex; align-items:center">
+              <span id="likesCount_4" style="margin-right: 5px; margin-left: 8px;">0</span>
+              <img id="coverImage_4"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
+            </div>
+          </div>
+        </div>
+
+        <div id="project_5" class ="col-12 col-md-6 mb-3" style="display: none">
+          <img src= "https://via.placeholder.com/1920x1080">
+          <div class="d-flex flex-row justify-content-between mt-2">
+            <div style="display:flex; align-items:center">
+              <span id="nameOfLayout_5">-Name of Layout-</span>
+            </div>
+            <div style="display:flex; align-items:center">
+              <span id="likesCount_5" style="margin-right: 5px; margin-left: 8px;">0</span>
+              <img id="coverImage_5"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
+            </div>
+          </div>
+        </div>
+
+      <div id="navigation" class="d-flex flex-row justify-content-center" style="text-align: center">
+        <!-- <button type="button" class="btn btn-primary m-1">1</button> -->
       </div>
 
     </div>
+
+    
+
   </body>
   
   <!-- References for scripts -->
@@ -209,6 +254,6 @@
   <script src="../script.js"></script>
   <script type="module" src = "../scripts/config.js"></script>
   <script type="module" src = "../scripts/firebaseScript.js"></script>
-  <script type="module" src = "../scripts/viewProject.js"></script>
+  <script type="module" src = "../scripts/search.js"></script>
   
 </html>
