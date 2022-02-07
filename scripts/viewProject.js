@@ -127,4 +127,26 @@ function GetViewProject(){
     furnituresUsed.innerHTML = viewData.furnitureUsed;
 }
 
+function GetImages(){
+    var projectKey = localStorage.getItem("viewProjectKey");
+    var latestProjectData = JSON.parse(localStorage.getItem("latestProjectData"));
+    var imageData = latestProjectData[projectKey].pictures;
+
+    if (imageData){
+        for (let i = 0; i<imageData.length; i++){
+            var carousel = "carouselImage" + i;
+            var carouselDiv = "carouselDiv" + i;
+
+            document.getElementById(carouselDiv).style.display = "inline";
+            document.getElementById(carousel).src = "data:image/png;base64," + imageData[i]; //gets base64 data of img and displays it
+            if (i==0){
+                document.getElementById(carouselDiv).className = "carousel-item active";
+            } else {
+                document.getElementById(carouselDiv).className = "carousel-item";
+            }
+        }
+    }
+}
+
 GetViewProject();
+GetImages();

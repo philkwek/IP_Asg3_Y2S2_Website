@@ -89,7 +89,13 @@ function InsertLatestProject(){ //loads in the first 8 projects from db on first
             if(latestProjectData[i].likes){
                 document.getElementById(likesId).innerHTML = latestProjectData[i].likes.length;
             }
-            //insert cover image
+
+            if (latestProjectData[i].pictures){ 
+                document.getElementById(imageId).src = "data:image/png;base64," + latestProjectData[i].pictures[0];
+            }else{
+                document.getElementById(imageId).src = "https://via.placeholder.com/1920x1080";
+            };
+            
         }
 
         //Creates navigation buttons
@@ -155,8 +161,17 @@ function nextPage(newPageNumber){ //loads projects based on page number clicked
             ViewProject(i);
         });
         document.getElementById(nameId).innerHTML = latestProjectData[i].nameOfLayout;
-        document.getElementById(likesId).innerHTML = latestProjectData[i].likes.length;
+        if (latestProjectData[i].likes){
+            document.getElementById(likesId).innerHTML = latestProjectData[i].likes.length;
+        } else {
+            document.getElementById(likesId).innerHTML = 0;
+        };
         //insert cover image
+        if (latestProjectData[i].pictures){ 
+            document.getElementById(imageId).src = "data:image/png;base64," + latestProjectData[i].pictures[0];
+        }else{
+            document.getElementById(imageId).src = "https://via.placeholder.com/1920x1080";
+        };
     }
 }
 

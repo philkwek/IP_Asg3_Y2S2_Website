@@ -92,8 +92,19 @@ function GetUserProjects(){
                     ViewProject(i);
                 });
                 document.getElementById(nameId).innerHTML = profileProjectData[i].nameOfLayout;
-                document.getElementById(likesId).innerHTML = profileProjectData[i].likes.length;
-                //insert cover image
+                
+                if (profileProjectData[i].likes){
+                    document.getElementById(likesId).innerHTML = profileProjectData[i].likes.length;
+                } else {
+                    document.getElementById(likesId).innerHTML = 0;
+                }
+                
+                if (profileProjectData[i].pictures){ 
+                    document.getElementById(imageId).src = "data:image/png;base64," + profileProjectData[i].pictures[0];
+                }else{
+                    document.getElementById(imageId).src = "https://via.placeholder.com/1920x1080";
+                };
+
             }
             //Creates navigation buttons
             var noOfButtons = Math.ceil(profileProjectData.length/4); //calculate number of nav buttons needed
@@ -161,8 +172,19 @@ function nextPage(newPageNumber){ //loads projects based on page number clicked
             ViewProject(i);
         });
         document.getElementById(nameId).innerHTML = profileProjectData[i].nameOfLayout;
-        document.getElementById(likesId).innerHTML = profileProjectData[i].likes.length;
-        //insert cover image
+        
+        if (profileProjectData[i].likes){
+            document.getElementById(likesId).innerHTML = profileProjectData[i].likes.length;
+        } else {
+            document.getElementById(likesId).innerHTML = 0;
+        }
+
+        if (profileProjectData[i].pictures){ 
+            document.getElementById(imageId).src = "data:image/png;base64," + profileProjectData[i].pictures[0];
+        }else{
+            document.getElementById(imageId).src = "https://via.placeholder.com/1920x1080";
+        };
+
     }
 }
 
