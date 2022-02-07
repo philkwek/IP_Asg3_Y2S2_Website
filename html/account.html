@@ -80,13 +80,15 @@
                   <h5 class="modal-title" id="exampleModalLabel">Account Settings</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body d-flex">
+                <div class="modal-body d-flex flex-wrap">
                   <button type="button" class="btn btn-primary flex-fill m-2" 
                   data-bs-toggle="modal" data-bs-target="#changeEmailModel" >Change Email</button>
                   <button type="button" class="btn btn-success flex-fill m-2" data-bs-toggle="modal"
                   data-bs-target="#changeUsernameModel">Change Username</button>
                   <button type="button" class="btn btn-warning flex-fill m-2" data-bs-toggle="modal"
                   data-bs-target="#changeProfilePictureModal">Change Profile Picture</button>
+                  <button type="button" class="btn btn-danger flex-fill m-2" data-bs-toggle="modal"
+                  data-bs-target="#removeProfilePictureModal">Remove Profile Picture</button>
                 </div>
               </div>
             </div>
@@ -161,12 +163,28 @@
             </div>
           </div>
         </div>
+        <div>
+          <div class="modal fade" id="removeProfilePictureModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Remove Profile Picture?</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id = "confirmRemoveProfilePic">Remove Profile Picture</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="row m-1 mt-4 justify-content-between">
         <div class="col-12 col-lg-3 mb-4 d-flex flex-column">  
           <div>
-            <img src= "https://via.placeholder.com/1920">
+            <img id="profilePicture" src= "https://via.placeholder.com/1920">
           </div>
           <div>
             <p id="username" style="font-weight: 500; font-size: 2.2rem; margin-bottom: 0; margin-top:0.8rem;">username</p>

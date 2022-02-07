@@ -12,13 +12,15 @@
     sendPasswordResetEmail,
     updateEmail, } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js";
 import { getDatabase, ref, child, set, update, remove, get, orderByChild } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js";
-import {getStorage, ref as sRef, uploadBytesResumable, getDownloadURL} from "https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js";
+import {getStorage, ref as sRef, deleteObject, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js";
 
 //Reference the imports
 const auth = getAuth();
 const db = getDatabase();
+const storage = getStorage();
 
 //References
+var uid;
 var signUpButton = document.getElementById("signupButton");
 var loginButton = document.getElementById("loginButton");
 var logoutButton = document.getElementById("logoutButton");
@@ -29,6 +31,11 @@ var changeEmailButton = document.getElementById("newEmailConfirmBtn");
 var changeUsernameButton = document.getElementById("newUsernameConfirmBtn");
 var createCompanyCheck = document.getElementById("createCompany");
 var createCompanyButton = document.getElementById("createCompanyButton");
+
+var imageInput = document.getElementById("profilePictureUpload");
+var imageUploadBtn = document.getElementById("newProfilePictureConfirm");
+var removeProfilePic = document.getElementById("confirmRemoveProfilePic");
+var imageUploaded;
 
 // Functions
 function signUpUser(email, username, password, authType){
@@ -142,7 +149,7 @@ onAuthStateChanged(auth, (user) => {
 if (user) {
   // User is signed in, see docs for a list of available properties
   // https://firebase.google.com/docs/reference/js/firebase.User
-  const uid = user.uid;
+  uid = user.uid;
   console.log(uid);
   if (usernamePlace != null){
     const dbref = ref(db);
@@ -195,6 +202,45 @@ function changeUsername(newUsername){
     const usernameUpdate = {};
     usernameUpdate['/users/' + uid + "/username"] = newUsername;
     return update(ref(db), usernameUpdate);
+}
+
+function UploadImage(){
+  if (imageUploaded){ //checks to ensure that user has selected a img for upload
+      const storageRef = sRef(storage, "Images/"+uid+"/"+"profilePicture.jpg");
+      uploadBytes(storageRef, imageUploaded).then((snapshot) => {
+          alert("Uploaded File!");
+          location.reload();
+      })
+
+  } else {
+      alert("You have not selected a image!")
+  }
+}
+
+function DeleteProfilePicture(){
+  const pathRef = sRef(storage, "Images/" + uid +"/profilePicture.jpg");
+  deleteObject(pathRef).then(() =>{
+      alert("Removed Profile Picture");
+  }).catch((error) => {
+      alert(error);
+  })
+}
+
+if (imageInput){
+  imageInput.addEventListener("change", function(){
+      imageUploaded = imageInput.files[0];
+  })
+}
+if (imageUploadBtn){
+  imageUploadBtn.addEventListener("click", function(){
+      UploadImage();
+  })
+}
+
+if (removeProfilePic){
+  removeProfilePic.addEventListener("click", function(x){
+    DeleteProfilePicture();
+  })
 }
 
 if (changeEmailButton){
@@ -290,3 +336,4 @@ if (createCompanyButton){
         createCompany(companyName, companyId, databaseId);
     });
 };
+
