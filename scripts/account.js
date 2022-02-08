@@ -37,12 +37,20 @@ onAuthStateChanged(auth, (user) => {
 function GetProfilePicture(){ //gets profilepicture img url from db and sets attribute
     const pathRef = sRef(storage, "Images/userProfilePictures/" + uid +"/profilePicture.jpg");
     const profilePicSet = document.getElementById("profilePicture");
-    getDownloadURL(pathRef).then((url)=>{
+    let url = sessionStorage.getItem("userProfilePic");
+    if (url){
         profilePicSet.setAttribute('src', url);
-    }).catch((error) =>{
-        //if does not exist, default pfp is used
-        profilePicSet.setAttribute('src', "../resources/icons/DefaultProfilePicture.png");
-    })
+    } else {
+        getDownloadURL(pathRef).then((url)=>{
+            profilePicSet.setAttribute('src', url);
+            sessionStorage.setItem("userProfilePic", url);
+        }).catch((error) =>{
+            //if does not exist, default pfp is used
+            url = "../resources/icons/DefaultProfilePicture.png"
+            profilePicSet.setAttribute('src', url);
+            sessionStorage.setItem("userProfilePic", url);
+        })
+    }
 }
 
 function GetUserData(){
