@@ -197,90 +197,87 @@
         </div>
       </div>
 
+      <div class="row m-1 mt-4 justify-content-between" id="userData" style="display: none">
+        <div class="col-12 col-lg-3 mb-4 d-flex flex-column">  
+          <div>
+            <img id="profilePicture" src= "../resources/icons/DefaultProfilePicture.png">
+          </div>
+          <div>
+            <p id="username" style="font-weight: 500; font-size: 2.2rem; margin-bottom: 0; margin-top:0.8rem;">username</p>
+            <p id="companyName" style="font-style: italic; font-size: 1.5rem;">Freelancer</p>
+          </div>
+          <div>
+            <button id="inviteCompany" type="button" class="btn btn-secondary" style="width: 100%">Invite to Company</button>
+          </div>
+        </div>
+        <div class="col-12 col-lg-9 d-flex flex-column">
+          <div>
+            <p class="accountProjectTitle">Projects (<span class="accountProjectTitle" id="projectsCount"></span>)</p>
+          </div>
+          
+          <div class="d-flex" id="profileProjectFlex">
 
-      <div class = "row m-1 mt-1" id="projectGallery">
-
-        <div id="project_0" class ="col-12 col-md-6 mb-3" style="display: none">
-          <img src= "https://via.placeholder.com/1920x1080">
-          <div class="d-flex flex-row justify-content-between mt-2">
-            <div style="display:flex; align-items:center">
-              <span id="nameOfLayout_0">-Name of Layout-</span>
+            <div id="project_0" class ="pb-4" style="display: inline;">
+              <img id="coverImage_0" src= "../resources/icons/Placeholder.png">
+              <div class="d-flex flex-row justify-content-between mt-2">
+                <div style="display:flex; align-items:center">
+                  <span id="nameOfLayout_0">-Name of Layout-</span>
+                </div>
+                <div style="display:flex; align-items:center">
+                  <span id="likesCount_0" style="margin-right: 5px; margin-left: 8px;">0</span>
+                  <img src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
+                </div>
+              </div>
             </div>
-            <div style="display:flex; align-items:center">
-              <span id="likesCount_0" style="margin-right: 5px; margin-left: 8px;">0</span>
-              <img id="coverImage_0"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
+    
+            <div id="project_1" class ="pb-4" style="display: inline">
+              <img id="coverImage_1" src= "../resources/icons/Placeholder.png">
+              <div class="d-flex flex-row justify-content-between mt-2">
+                <div style="display:flex; align-items:center">
+                  <span id="nameOfLayout_1">-Name of Layout-</span>
+                </div>
+                <div style="display:flex; align-items:center">
+                  <span id="likesCount_1" style="margin-right: 5px; margin-left: 8px;">0</span>
+                  <img src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
+                </div>
+              </div>
+            </div>
+    
+            <div id="project_2" class ="pb-4" style="display: inline">
+              <img id="coverImage_2" src= "../resources/icons/Placeholder.png">
+              <div class="d-flex flex-row justify-content-between mt-2">
+                <div style="display:flex; align-items:center">
+                  <span id="nameOfLayout_2">-Name of Layout-</span>
+                </div>
+                <div style="display:flex; align-items:center">
+                  <span id="likesCount_2" style="margin-right: 5px; margin-left: 8px;">0</span>
+                  <img src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
+                </div>
+              </div>
+            </div>
+
+            <div id="project_3" class ="pb-4" style="display: inline">
+              <img id="coverImage_3" src= "../resources/icons/Placeholder.png">
+              <div class="d-flex flex-row justify-content-between mt-2">
+                <div style="display:flex; align-items:center">
+                  <span id="nameOfLayout_3">-Name of Layout-</span>
+                </div>
+                <div style="display:flex; align-items:center">
+                  <span id="likesCount_3" style="margin-right: 5px; margin-left: 8px;">0</span>
+                  <img src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
+                </div>
+              </div>
+            </div>
+
+            <div id="navigation" class="d-flex flex-row justify-content-center" style="text-align: center">
+              
             </div>
           </div>
         </div>
-
-        <div id="project_1" class ="col-12 col-md-6 mb-3" style="display: none">
-          <img src= "https://via.placeholder.com/1920x1080">
-          <div class="d-flex flex-row justify-content-between mt-2">
-            <div style="display:flex; align-items:center">
-              <span id="nameOfLayout_1">-Name of Layout-</span>
-            </div>
-            <div style="display:flex; align-items:center">
-              <span id="likesCount_1" style="margin-right: 5px; margin-left: 8px;">0</span>
-              <img id="coverImage_1"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
-            </div>
-          </div>
-        </div>
-
-        <div id="project_2" class ="col-12 col-md-6 mb-3" style="display: none">
-          <img src= "https://via.placeholder.com/1920x1080">
-          <div class="d-flex flex-row justify-content-between mt-2">
-            <div style="display:flex; align-items:center">
-              <span id="nameOfLayout_2">-Name of Layout-</span>
-            </div>
-            <div style="display:flex; align-items:center">
-              <span id="likesCount_2" style="margin-right: 5px; margin-left: 8px;">0</span>
-              <img id="coverImage_2"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
-            </div>
-          </div>
-        </div>
-
-        <div id="project_3" class ="col-12 col-md-6 mb-3" style="display: none">
-          <img src= "https://via.placeholder.com/1920x1080">
-          <div class="d-flex flex-row justify-content-between mt-2">
-            <div style="display:flex; align-items:center">
-              <span id="nameOfLayout_3">-Name of Layout-</span>
-            </div>
-            <div style="display:flex; align-items:center">
-              <span id="likesCount_3" style="margin-right: 5px; margin-left: 8px;">0</span>
-              <img id="coverImage_3"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
-            </div>
-          </div>
-        </div>
-
-        <div id="project_4" class ="col-12 col-md-6 mb-3" style="display: none">
-          <img src= "https://via.placeholder.com/1920x1080">
-          <div class="d-flex flex-row justify-content-between mt-2">
-            <div style="display:flex; align-items:center">
-              <span id="nameOfLayout_4">-Name of Layout-</span>
-            </div>
-            <div style="display:flex; align-items:center">
-              <span id="likesCount_4" style="margin-right: 5px; margin-left: 8px;">0</span>
-              <img id="coverImage_4"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
-            </div>
-          </div>
-        </div>
-
-        <div id="project_5" class ="col-12 col-md-6 mb-3" style="display: none">
-          <img src= "https://via.placeholder.com/1920x1080">
-          <div class="d-flex flex-row justify-content-between mt-2">
-            <div style="display:flex; align-items:center">
-              <span id="nameOfLayout_5">-Name of Layout-</span>
-            </div>
-            <div style="display:flex; align-items:center">
-              <span id="likesCount_5" style="margin-right: 5px; margin-left: 8px;">0</span>
-              <img id="coverImage_5"src="../resources/icons/like.png" style="width: 20px; height: 20px; vertical-align: middle">
-            </div>
-          </div>
-        </div>
-
-      <div id="navigation" class="d-flex flex-row justify-content-center" style="text-align: center">
-        <!-- <button type="button" class="btn btn-primary m-1">1</button> -->
       </div>
+
+
+
 
     </div>
 

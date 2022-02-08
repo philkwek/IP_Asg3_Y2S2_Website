@@ -18,7 +18,9 @@ const storage = getStorage();
 
 //Button References
 const searchUserButton = document.getElementById("searchUsersBtn");
+const userDiv = document.getElementById("userData");
 const searchCompanyButton = document.getElementById("searchCompanyBtn");
+const companyDiv = document.getElementById("companyDiv");
 
 if (searchUserButton){
     searchUserButton.addEventListener("click", function(){
@@ -38,7 +40,15 @@ if (searchCompanyButton){
     })
 }
 
+function ValidateEmail(input) //function for checking if input is an email or not
+{
+    var re = /\S+@\S+\.\S+/;
+    return re.test(input);
+}
+
 function SearchUsers(input, emailCheck){
+    userDiv.style.display = "";
+    companyDiv.style.display = "none";
     if (emailCheck){
         var searchQuery = query(ref(db, 'users'), orderByChild("email"), equalTo(input), limitToFirst(1));
     } else {
@@ -62,10 +72,4 @@ function SearchCompany(companyName){
             console.log("failed");
         }
     });
-}
-
-function ValidateEmail(input) //function for checking if input is an email or not
-{
-    var re = /\S+@\S+\.\S+/;
-    return re.test(input);
 }
