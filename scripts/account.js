@@ -36,11 +36,12 @@ onAuthStateChanged(auth, (user) => {
 
 function GetProfilePicture(){ //gets profilepicture img url from db and sets attribute
     const pathRef = sRef(storage, "Images/userProfilePictures/" + uid +"/profilePicture.jpg");
+    const profilePicSet = document.getElementById("profilePicture");
     getDownloadURL(pathRef).then((url)=>{
-        const profilePicSet = document.getElementById("profilePicture");
         profilePicSet.setAttribute('src', url);
     }).catch((error) =>{
-        //if does not exist, placeholder default pfp is used
+        //if does not exist, default pfp is used
+        profilePicSet.setAttribute('src', "../resources/icons/DefaultProfilePicture.png");
     })
 }
 
@@ -102,7 +103,7 @@ function GetUserProjects(){
                 if (profileProjectData[i].pictures){ 
                     document.getElementById(imageId).src = "data:image/png;base64," + profileProjectData[i].pictures[0];
                 }else{
-                    document.getElementById(imageId).src = "https://via.placeholder.com/1920x1080";
+                    document.getElementById(imageId).src = "../resources/icons/Placeholder.png";
                 };
 
             }
@@ -182,7 +183,7 @@ function nextPage(newPageNumber){ //loads projects based on page number clicked
         if (profileProjectData[i].pictures){ 
             document.getElementById(imageId).src = "data:image/png;base64," + profileProjectData[i].pictures[0];
         }else{
-            document.getElementById(imageId).src = "https://via.placeholder.com/1920x1080";
+            document.getElementById(imageId).src = "../resources/icons/Placeholder.png";
         };
 
     }

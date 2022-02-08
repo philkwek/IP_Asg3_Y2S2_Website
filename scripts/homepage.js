@@ -93,7 +93,7 @@ function InsertLatestProject(){ //loads in the first 8 projects from db on first
             if (latestProjectData[i].pictures){ 
                 document.getElementById(imageId).src = "data:image/png;base64," + latestProjectData[i].pictures[0];
             }else{
-                document.getElementById(imageId).src = "https://via.placeholder.com/1920x1080";
+                document.getElementById(imageId).src = "../resources/icons/Placeholder.png";
             };
             
         }
@@ -170,7 +170,7 @@ function nextPage(newPageNumber){ //loads projects based on page number clicked
         if (latestProjectData[i].pictures){ 
             document.getElementById(imageId).src = "data:image/png;base64," + latestProjectData[i].pictures[0];
         }else{
-            document.getElementById(imageId).src = "https://via.placeholder.com/1920x1080";
+            document.getElementById(imageId).src = "../resources/icons/Placeholder.png";
         };
     }
 }

@@ -69,7 +69,6 @@
             </div>
           </div>
         </div>
-
         <div>
           <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -78,11 +77,15 @@
                   <h5 class="modal-title" id="exampleModalLabel">Account Settings</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body d-flex">
+                <div class="modal-body d-flex flex-wrap">
                   <button type="button" class="btn btn-primary flex-fill m-2" 
                   data-bs-toggle="modal" data-bs-target="#changeEmailModel" >Change Email</button>
                   <button type="button" class="btn btn-success flex-fill m-2" data-bs-toggle="modal"
                   data-bs-target="#changeUsernameModel">Change Username</button>
+                  <button type="button" class="btn btn-warning flex-fill m-2" data-bs-toggle="modal"
+                  data-bs-target="#changeProfilePictureModal">Change Profile Picture</button>
+                  <button type="button" class="btn btn-danger flex-fill m-2" data-bs-toggle="modal"
+                  data-bs-target="#removeProfilePictureModal">Remove Profile Picture</button>
                 </div>
               </div>
             </div>
@@ -131,6 +134,43 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                   <button type="button" class="btn btn-primary" id = "newUsernameConfirmBtn">Confirm Change</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="modal fade" id="changeProfilePictureModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Change Profile Picture</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <input class="form-control" type="file" id="profilePictureUpload">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id = "newProfilePictureConfirm">Confirm Change</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="modal fade" id="removeProfilePictureModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Remove Profile Picture?</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id = "confirmRemoveProfilePic">Remove Profile Picture</button>
                 </div>
               </div>
             </div>
