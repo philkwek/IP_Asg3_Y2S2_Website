@@ -47,7 +47,6 @@ onAuthStateChanged(auth, (user) => {
 });
 
 function GetLatestList(){ //gets names of all projects for search
-    const dbRef = ref(getDatabase());
     const mostRecentProjects = query(ref(db, 'projects'), orderByChild("dateCreated"));
     get(mostRecentProjects).then((snapshot) =>{
         var data = snapshot.val();
