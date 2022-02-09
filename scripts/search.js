@@ -272,6 +272,7 @@ function GetUserProjects(userId){
             var data = snapshot.val();
             profileProjectData = Object.values(data);
             projectKeysArray = Object.keys(data);
+            document.getElementById("projectsCount").innerHTML = profileProjectData.length;
             localStorage.setItem("profileProjectData", JSON.stringify(data));
             var projectNumber = 0;
             for (let i=0; i<profileProjectData.length; i++){ //functions loops through all existing projects, displays first top 8
@@ -389,20 +390,13 @@ function nextPage(newPageNumber){ //loads projects based on page number clicked
 function GetProfilePicture(userId){ //gets profilepicture img url from db and sets attribute
     const pathRef = sRef(storage, "Images/userProfilePictures/" + userId +"/profilePicture.jpg");
     const profilePicSet = document.getElementById("profilePicture");
-    let url = sessionStorage.getItem("userProfilePic");
-    if (url){
+    getDownloadURL(pathRef).then((url)=>{
         profilePicSet.setAttribute('src', url);
-    } else {
-        getDownloadURL(pathRef).then((url)=>{
-            profilePicSet.setAttribute('src', url);
-            sessionStorage.setItem("userProfilePic", url);
-        }).catch((error) =>{
-            //if does not exist, default pfp is used
-            url = "../resources/icons/DefaultProfilePicture.png"
-            profilePicSet.setAttribute('src', url);
-            sessionStorage.setItem("userProfilePic", url);
-        })
-    }
+    }).catch((error) =>{
+        //if does not exist, default pfp is used
+        var url = "../resources/icons/DefaultProfilePicture.png"
+        profilePicSet.setAttribute('src', url);
+    })
 }
 
 function GetUserData(userId){
@@ -411,7 +405,6 @@ function GetUserData(userId){
         if(snapshot.exists()){
             const data = snapshot.val();
             document.getElementById("username").innerHTML = data.username;
-            document.getElementById("projectsCount").innerHTML = data.projectsCreated.length;
             get(child(dbref, "company/" + data.companyId)).then((snapshot)=>{ //get company name from database
                 if(snapshot.exists()){
                     const name = snapshot.val().companyName;

@@ -91,7 +91,7 @@ a:link {
 }
 
 #profileProjectFlex{
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     margin:-10px;
 }
@@ -103,7 +103,7 @@ a:link {
 
 @media (max-width: 1200px){
     #profileProjectFlex{
-        display: flex;
+        display: none;
         flex-wrap: wrap;
         margin:-10px;
     }

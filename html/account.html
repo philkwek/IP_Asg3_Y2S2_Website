@@ -207,14 +207,14 @@
             data-bs-toggle="modal" data-bs-target="#settingsModal">Edit Profile</button>
           </div>
         </div>
-        <div class="col-12 col-lg-9 d-flex flex-column">
+        <div class="col-12 col-lg-9 flex-column">
           <div>
-            <p class="accountProjectTitle">Projects (<span class="accountProjectTitle" id="projectsCount"></span>)</p>
+            <p class="accountProjectTitle">Projects (<span class="accountProjectTitle" id="projectsCount">0</span>)</p>
           </div>
           
-          <div class="d-flex" id="profileProjectFlex">
+          <div id="profileProjectFlex">
 
-            <div id="project_0" class ="pb-4" style="display: inline;">
+            <div id="project_0" class ="pb-4" style="display: none;">
               <img id="coverImage_0" src= "https://via.placeholder.com/1920x1080">
               <div class="d-flex flex-row justify-content-between mt-2">
                 <div style="display:flex; align-items:center">
@@ -227,7 +227,7 @@
               </div>
             </div>
     
-            <div id="project_1" class ="pb-4" style="display: inline">
+            <div id="project_1" class ="pb-4" style="display: none">
               <img id="coverImage_1" src= "https://via.placeholder.com/1920x1080">
               <div class="d-flex flex-row justify-content-between mt-2">
                 <div style="display:flex; align-items:center">
@@ -240,7 +240,7 @@
               </div>
             </div>
     
-            <div id="project_2" class ="pb-4" style="display: inline">
+            <div id="project_2" class ="pb-4" style="display: none">
               <img id="coverImage_2" src= "https://via.placeholder.com/1920x1080">
               <div class="d-flex flex-row justify-content-between mt-2">
                 <div style="display:flex; align-items:center">
@@ -253,7 +253,7 @@
               </div>
             </div>
 
-            <div id="project_3" class ="pb-4" style="display: inline">
+            <div id="project_3" class ="pb-4" style="display: none">
               <img id="coverImage_3" src= "https://via.placeholder.com/1920x1080">
               <div class="d-flex flex-row justify-content-between mt-2">
                 <div style="display:flex; align-items:center">
@@ -265,11 +265,9 @@
                 </div>
               </div>
             </div>
-
-            <div id="navigation" class="d-flex flex-row justify-content-center" style="text-align: center">
+          </div>
+          <div id="navigation" class="d-flex flex-row justify-content-center" style="text-align: center">
               
-            </div>
-
           </div>
         </div>
       </div>

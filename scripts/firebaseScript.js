@@ -114,9 +114,9 @@ function writeUserData(email, username, databaseId) {
       console.log("User data written successfully");
       if (createCompanyCheck.checked){  // check if user is creating account with new company or just account
         //open create company page
-        window.location.href = "createCompany.html"
+        window.location.href = "../resources/createCompany.html"
     } else {
-            //open homepage menu
+      window.location.href = "../html/homepage.html"
         }
   })
   .catch((error)=>{
@@ -132,16 +132,13 @@ function createCompany(companyName, companyId, databaseId){
         alert("Company ID already exists! Please change to a different ID.");
       } else {  
           let newCompany = new Company(companyName, companyId, databaseId)
-          set(ref(db, 'company/' + companyId), newCompany);
+          set(ref(db, 'company/' + companyId), newCompany); //creates company 
 
           const companyIdUpdate = {};
           companyIdUpdate['/users/' + databaseId + "/companyId"] = companyId;
-          return update(dbref, companyIdUpdate);
+          return update(dbref, companyIdUpdate); //adds companyId to user profile
       }
     });
-
-    //if not, create new company, add current user then open alert and go to homepage
-    //if yes, return alert error
 }
 
 // Event listeners
@@ -167,12 +164,9 @@ if (user) {
   var path = window. location. pathname;
   var page = path. split("/"). pop();
   console.log(page);
-  if(page == "index.html"){
-    window.location.href = "html/homepage.html"
+  if(page == "index.html" || page == "login.html"){
+    window.location.href = "../html/homepage.html";
   } 
-  if(page == "signup.html"){
-    window.location.href = "html/homepage.html"
-  }
 } else {
   // User is signed out
 
