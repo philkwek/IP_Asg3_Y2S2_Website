@@ -157,3 +157,9 @@ a:link {
     border-color: transparent;
     background-color: transparent;
 }
+
+.companyDesignerList{
+    font-size: 1.3rem;
+    margin-bottom: 0px;
+    font-weight: 500;
+}
