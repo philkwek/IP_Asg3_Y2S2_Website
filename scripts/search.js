@@ -39,11 +39,6 @@ if (makeNewSearchButton){
 if (searchUserButton){
     searchUserButton.addEventListener("click", function(){
         const searchInput = document.getElementById("searchInput").value;
-        document.getElementById("makeNewSearch").style.display = "";
-        var elements = document.getElementsByClassName("newSearch")
-        for (let i=0; i<elements.length; i++){
-            elements[i].style.display = "none";
-        }
         if(ValidateEmail(searchInput)){ //validates input to check if email or not
             SearchUsers(searchInput, true);
         } else {
@@ -56,12 +51,22 @@ if (searchCompanyButton){
     searchCompanyButton.addEventListener("click", function(){
         const searchInput = document.getElementById("searchInput").value;
         SearchCompany(searchInput);
-        document.getElementById("makeNewSearch").style.display = "";
-        var elements = document.getElementsByClassName("newSearch")
-        for (let i=0; i<elements.length; i++){
-            elements[i].style.display = "none";
-        }
     })
+}
+
+function HideSearch(searchType){ //function for hiding search bar and buttons for looking at results
+    document.getElementById("makeNewSearch").style.display = "";
+    var elements = document.getElementsByClassName("newSearch")
+    for (let i=0; i<elements.length; i++){
+        elements[i].style.display = "none";
+    }
+    if (searchType){ //true=user search, false=company search
+        userDiv.style.display = "";
+        companyDiv.style.display = "none";
+    } else {
+        userDiv.style.display = "none";
+        companyDiv.style.display = "";
+    }
 }
 
 function ValidateEmail(input) //function for checking if input is an email or not
@@ -71,8 +76,6 @@ function ValidateEmail(input) //function for checking if input is an email or no
 }
 
 function SearchUsers(input, emailCheck){
-    userDiv.style.display = "";
-    companyDiv.style.display = "none";
     if (emailCheck){
         var searchQuery = query(ref(db, 'users'), orderByChild("email"), equalTo(input), limitToFirst(1));
     } else {
@@ -80,23 +83,23 @@ function SearchUsers(input, emailCheck){
     }
     get(searchQuery).then((snapshot)=>{
         if (snapshot.exists()){
+            HideSearch(true);
             var data = snapshot.val();
             var userId = Object.values(data)[0].databaseId;
             GetUserProjects(userId);
             GetProfilePicture(userId);
             GetUserData(userId);
         } else { //Runs if user searched does not exist
-            console.log("failed");
+            alert("User does not exist! User name & email is case sensitive. Please try again.")
         }
     });
 }
 
 function SearchCompany(companyName){
-    userDiv.style.display = "none";
-    companyDiv.style.display = "";
     const searchQuery = query(ref(db, 'company'), orderByChild("companyName"), equalTo(companyName), limitToFirst(1));
     get(searchQuery).then((snapshot)=>{
         if (snapshot.exists()){
+            HideSearch(false);
             var data = snapshot.val();
             data = Object.values(data)[0];
             document.getElementById("companyName").innerHTML = data.companyName; //inserts name of company
@@ -106,7 +109,7 @@ function SearchCompany(companyName){
             GetCompanyLogo(companyId);
 
         } else {
-            console.log("failed");
+            alert("Company does not exist! Company name is case sensitive. Please try again.");
         }
     });
 }
