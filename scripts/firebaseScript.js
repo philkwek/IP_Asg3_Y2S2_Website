@@ -300,7 +300,7 @@ logoutButton.addEventListener("click",function(x){
   x.preventDefault();
   console.log("Logging out user...")
   logoutUser();
-  window.location.href = "../../index.html";
+  window.location.href = "../index.html";
 })
 }
 
