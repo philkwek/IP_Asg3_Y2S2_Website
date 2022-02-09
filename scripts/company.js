@@ -39,9 +39,22 @@ function GetUserCompanyId(userId){
                 document.getElementById("companyData").style.display = "";
                 GetCompanyProjects(data.companyId);
                 GetCompanyEmployees(data.companyId);
+                GetCompanyName(data.companyId);
             } else { //if not in company, displays message that user is not in company
                 document.getElementById("noCompanyTitle").style.display = "";
             }
+        } else {
+            console.log("Failed");
+        }
+    });
+}
+
+function GetCompanyName(companyId){
+    const dbref = ref(db);
+    get(child(dbref, "company/" + companyId)).then((snapshot)=>{
+        if(snapshot.exists()){
+            var data = snapshot.val();
+            document.getElementById("companyName").innerHTML = data.companyName;
         } else {
             console.log("Failed");
         }
