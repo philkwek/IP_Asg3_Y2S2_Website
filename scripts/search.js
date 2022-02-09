@@ -18,6 +18,7 @@ const storage = getStorage();
 
 //Global References
 var companyProjectData;
+var profileProjectData;
 var projectKeysArray;
 var pageNumber = 0;
 var searched = false;
@@ -79,7 +80,11 @@ function SearchUsers(input, emailCheck){
     }
     get(searchQuery).then((snapshot)=>{
         if (snapshot.exists()){
-            console.log(snapshot.val());
+            var data = snapshot.val();
+            var userId = Object.values(data)[0].databaseId;
+            GetUserProjects(userId);
+            GetProfilePicture(userId);
+            GetUserData(userId);
         } else { //Runs if user searched does not exist
             console.log("failed");
         }
@@ -167,7 +172,7 @@ function GetCompanyProjects(companyId){
                     }
                     btn.id = "pageButton" + i;
                     btn.addEventListener("click", function(){
-                        nextPage(i);
+                        companyNextPage(i);
                     });
                     document.getElementById("companyNavigation").appendChild(btn);
                 }
@@ -178,7 +183,7 @@ function GetCompanyProjects(companyId){
     });
 }
 
-function nextPage(newPageNumber){ //loads projects based on page number clicked
+function companyNextPage(newPageNumber){ //loads projects based on page number clicked
     for (let i=0; i<4; i++){ //functions loops through all existing projects, displays that pages 8
         //creates reference IDs for innerHTML insertion of data
         var projectId = "companyProject_" + i;
@@ -252,6 +257,169 @@ function GetCompanyEmployees(companyId){
             document.getElementById("companyDesignerCount").innerHTML = data.length;
         } else {
             console.log("Failed to get Employees");
+        }
+    });
+}
+
+function GetUserProjects(userId){
+    const dbref = ref(db);
+    const userProjects = query(ref(db, 'projects/'), orderByChild("creator"), equalTo(userId))
+    get(userProjects).then((snapshot)=>{
+        if(snapshot.exists()){
+            var data = snapshot.val();
+            profileProjectData = Object.values(data);
+            projectKeysArray = Object.keys(data);
+            localStorage.setItem("profileProjectData", JSON.stringify(data));
+            var projectNumber = 0;
+            for (let i=0; i<profileProjectData.length; i++){ //functions loops through all existing projects, displays first top 8
+                projectNumber += 1;
+                if (projectNumber > 4){
+                    break //ensures function loads only the first 8 projects on screen
+                };
+                //creates reference IDs for innerHTML insertion of data
+                var projectId = "project_" + i;
+                var nameId = "nameOfLayout_" + i;
+                var likesId = "likesCount_" + i;
+                var imageId = "coverImage_" + i;
+
+                document.getElementById(projectId).style.display = "inline";
+                document.getElementById(projectId).addEventListener("click", function(){
+                    ViewProject(i);
+                });
+                document.getElementById(nameId).innerHTML = profileProjectData[i].nameOfLayout;
+                
+                if (profileProjectData[i].likes){
+                    document.getElementById(likesId).innerHTML = profileProjectData[i].likes.length;
+                } else {
+                    document.getElementById(likesId).innerHTML = 0;
+                }
+                
+                if (profileProjectData[i].pictures){ 
+                    document.getElementById(imageId).src = "data:image/png;base64," + profileProjectData[i].pictures[0];
+                }else{
+                    document.getElementById(imageId).src = "../resources/icons/Placeholder.png";
+                };
+
+            }
+            //Creates navigation buttons
+            var noOfButtons = Math.ceil(profileProjectData.length/4); //calculate number of nav buttons needed
+            //var noOfButtons = 3;
+            if (noOfButtons > 0){
+                for (let i=0; i<noOfButtons; i++){
+                    //<button type="button" class="btn btn-primary m-1" id="">1</button>
+                    var buttonId = "page" + i;
+                    var buttonName = i + 1;
+                    let btn = document.createElement("button");
+                    btn.innerHTML = buttonName;
+                    if (i==0){
+                    btn.className="btn btn-primary m-1"; //blue color for currently selected page
+                    } else {
+                        btn.className = "btn btn-secondary m-1";
+                    }
+                    btn.id = "pageButton" + i;
+                    btn.addEventListener("click", function(){
+                        nextPage(i);
+                    });
+                    document.getElementById("navigation").appendChild(btn);
+                }
+            }
+        } else {
+            console.log("failed");
+        }
+    });
+}
+
+function nextPage(newPageNumber){ //loads projects based on page number clicked
+    for (let i=0; i<4; i++){ //functions loops through all existing projects, displays that pages 8
+        //creates reference IDs for innerHTML insertion of data
+        var projectId = "project_" + i;
+        document.getElementById(projectId).style.display = "none";
+    }
+    var buttonId = "pageButton" + newPageNumber;
+    var oldButtonId = "pageButton" + pageNumber;
+    document.getElementById(buttonId).className = "btn btn-primary m-1";
+    document.getElementById(oldButtonId).className = "btn btn-secondary m-1";
+    pageNumber = newPageNumber;
+
+    if (pageNumber==0){
+        var projectCount = 0; //current count of project if page number is 1 (or 0 in script terms)
+        var maxProjectNumber = 4; //highest count of projects that can be shown
+    } else {
+        var projectCount = pageNumber * 4; //current count of project
+        var maxProjectNumber = projectCount + 4; //highest count of projects that can be shown
+    }
+
+    var loopCount = -1;
+    for (let i=projectCount; i<profileProjectData.length; i++){ //functions loops through all existing projects, displays that pages 8
+        projectCount += 1;
+        loopCount += 1;
+        if (projectCount > maxProjectNumber){
+            break //ensures function loads only 8 projects
+        };
+        //creates reference IDs for innerHTML insertion of data
+        var projectId = "project_" + loopCount;
+        var nameId = "nameOfLayout_" + loopCount;
+        var likesId = "likesCount_" + loopCount;
+        var imageId = "coverImage_" + loopCount;
+
+        document.getElementById(projectId).style.display = "inline";
+        document.getElementById(projectId).addEventListener("click", function(){
+            ViewProject(i);
+        });
+        document.getElementById(nameId).innerHTML = profileProjectData[i].nameOfLayout;
+        
+        if (profileProjectData[i].likes){
+            document.getElementById(likesId).innerHTML = profileProjectData[i].likes.length;
+        } else {
+            document.getElementById(likesId).innerHTML = 0;
+        }
+
+        if (profileProjectData[i].pictures){ 
+            document.getElementById(imageId).src = "data:image/png;base64," + profileProjectData[i].pictures[0];
+        }else{
+            document.getElementById(imageId).src = "../resources/icons/Placeholder.png";
+        };
+
+    }
+}
+
+function GetProfilePicture(userId){ //gets profilepicture img url from db and sets attribute
+    const pathRef = sRef(storage, "Images/userProfilePictures/" + userId +"/profilePicture.jpg");
+    const profilePicSet = document.getElementById("profilePicture");
+    let url = sessionStorage.getItem("userProfilePic");
+    if (url){
+        profilePicSet.setAttribute('src', url);
+    } else {
+        getDownloadURL(pathRef).then((url)=>{
+            profilePicSet.setAttribute('src', url);
+            sessionStorage.setItem("userProfilePic", url);
+        }).catch((error) =>{
+            //if does not exist, default pfp is used
+            url = "../resources/icons/DefaultProfilePicture.png"
+            profilePicSet.setAttribute('src', url);
+            sessionStorage.setItem("userProfilePic", url);
+        })
+    }
+}
+
+function GetUserData(userId){
+    const dbref = ref(db);
+    get(child(dbref, "users/" + userId)).then((snapshot)=>{ //get company name from database
+        if(snapshot.exists()){
+            const data = snapshot.val();
+            document.getElementById("username").innerHTML = data.username;
+            document.getElementById("projectsCount").innerHTML = data.projectsCreated.length;
+            get(child(dbref, "company/" + data.companyId)).then((snapshot)=>{ //get company name from database
+                if(snapshot.exists()){
+                    const name = snapshot.val().companyName;
+                    document.getElementById("companyName").innerHTML = name;
+                } else {
+                    //ignore
+                }
+            });
+            console.log(data);
+        } else {
+          console.log("Not found");
         }
     });
 }
