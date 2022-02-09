@@ -20,16 +20,29 @@ const storage = getStorage();
 var companyProjectData;
 var projectKeysArray;
 var pageNumber = 0;
+var searched = false;
 
 //Button References
 const searchUserButton = document.getElementById("searchUsersBtn");
 const userDiv = document.getElementById("userData");
 const searchCompanyButton = document.getElementById("searchCompanyBtn");
 const companyDiv = document.getElementById("companyData");
+const makeNewSearchButton = document.getElementById("makeNewSearch");
+
+if (makeNewSearchButton){
+    makeNewSearchButton.addEventListener("click", function(){
+        location.reload();
+    });
+}
 
 if (searchUserButton){
     searchUserButton.addEventListener("click", function(){
         const searchInput = document.getElementById("searchInput").value;
+        document.getElementById("makeNewSearch").style.display = "";
+        var elements = document.getElementsByClassName("newSearch")
+        for (let i=0; i<elements.length; i++){
+            elements[i].style.display = "none";
+        }
         if(ValidateEmail(searchInput)){ //validates input to check if email or not
             SearchUsers(searchInput, true);
         } else {
@@ -42,6 +55,11 @@ if (searchCompanyButton){
     searchCompanyButton.addEventListener("click", function(){
         const searchInput = document.getElementById("searchInput").value;
         SearchCompany(searchInput);
+        document.getElementById("makeNewSearch").style.display = "";
+        var elements = document.getElementsByClassName("newSearch")
+        for (let i=0; i<elements.length; i++){
+            elements[i].style.display = "none";
+        }
     })
 }
 
@@ -99,7 +117,7 @@ function GetCompanyProjects(companyId){
             var data = snapshot.val();
             companyProjectData = Object.values(data);
             projectKeysArray = Object.keys(data);
-            localStorage.setItem("companyProjectData", JSON.stringify(data));
+            localStorage.setItem("latestProjectData", JSON.stringify(data));
             var projectNumber = 0;
             document.getElementById("companyProjectCount").innerHTML = companyProjectData.length;
             for (let i=0; i<companyProjectData.length; i++){ //functions loops through all existing projects, displays first top 8
@@ -212,6 +230,12 @@ function nextPage(newPageNumber){ //loads projects based on page number clicked
         };
 
     }
+}
+
+function ViewProject(projectArrayId){
+    var viewProjectKey = projectKeysArray[projectArrayId];
+    localStorage.setItem("viewProjectKey", viewProjectKey); //store viewprojectid into localstorage to be retrieved when viewProject.html opens 
+    window.location = "../html/viewProject.html";
 }
 
 function GetCompanyEmployees(companyId){

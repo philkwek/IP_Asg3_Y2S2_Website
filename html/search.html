@@ -184,7 +184,7 @@
         </div>
       </div>
 
-      <div class = "row m-1" id="searchDiv" style="display: inline">
+      <div class = "newSearch row m-1" id="searchDiv" style="display: inline">
         <div class="col-12 input-group">
           <input id="searchInput" type="text" class="form-control" placeholder="Search for a user or company...">
         </div>
@@ -192,8 +192,9 @@
 
       <div class="row">
         <div class="col-12 d-flex">
-          <button id="searchUsersBtn" type="button" class="btn btn-primary flex-fill m-2">Search Users</button>
-          <button id="searchCompanyBtn" type="button" class="btn btn-success flex-fill m-2">Search Company</button>
+          <button id="searchUsersBtn" type="button" class="newSearch btn btn-primary flex-fill m-2">Search Users</button>
+          <button id="searchCompanyBtn" type="button" class="newSearch btn btn-success flex-fill m-2">Search Company</button>
+          <button id="makeNewSearch" type="button" class="btn btn-secondary flex-fill m-2" style="display: none;">Make New Search</button>
         </div>
       </div>
 
@@ -282,21 +283,21 @@
             <img id="companyLogo" src= "../resources/icons/DefaultProfilePicture.png">
           </div>
           <div>
-            <p id="companyName" style="font-weight: 500; font-size: 2.2rem; margin-bottom: 0; margin-top:0.8rem;">Company Name</p>
+            <p id="companyName" style="font-weight: 500; font-size: 2.2rem; margin-bottom: 0; margin-top:0.8rem;"></p>
           </div>
           <div>
-            <p class="companyDesignerList">Designers (<span class="companyDesignerList" id="companyDesignerCount"></span>)</p>
+            <p class="companyDesignerList">Designers (<span class="companyDesignerList" id="companyDesignerCount">0</span>)</p>
             <p id="companyDesignerList"></p>
           </div>
         </div>
         <div class="col-12 col-lg-9 d-flex flex-column">
           <div>
-            <p class="accountProjectTitle">Company Projects (<span class="accountProjectTitle" id="companyProjectCount"></span>)</p>
+            <p class="accountProjectTitle">Company Projects (<span class="accountProjectTitle" id="companyProjectCount">0</span>)</p>
           </div>
           
           <div class="d-flex" id="profileProjectFlex">
 
-            <div id="companyProject_0" class ="pb-4" style="display: inline;">
+            <div id="companyProject_0" class ="pb-4" style="display: none;">
               <img id="companyCoverImage_0" src= "../resources/icons/Placeholder.png">
               <div class="d-flex flex-row justify-content-between mt-2">
                 <div style="display:flex; align-items:center">
@@ -309,7 +310,7 @@
               </div>
             </div>
     
-            <div id="companyProject_1" class ="pb-4" style="display: inline">
+            <div id="companyProject_1" class ="pb-4" style="display: none">
               <img id="companyCoverImage_1" src= "../resources/icons/Placeholder.png">
               <div class="d-flex flex-row justify-content-between mt-2">
                 <div style="display:flex; align-items:center">
@@ -322,7 +323,7 @@
               </div>
             </div>
     
-            <div id="companyProject_2" class ="pb-4" style="display: inline">
+            <div id="companyProject_2" class ="pb-4" style="display: none">
               <img id="companyCoverImage_2" src= "../resources/icons/Placeholder.png">
               <div class="d-flex flex-row justify-content-between mt-2">
                 <div style="display:flex; align-items:center">
@@ -335,7 +336,7 @@
               </div>
             </div>
 
-            <div id="companyProject_3" class ="pb-4" style="display: inline">
+            <div id="companyProject_3" class ="pb-4" style="display: none">
               <img id="companyCoverImage_3" src= "../resources/icons/Placeholder.png">
               <div class="d-flex flex-row justify-content-between mt-2">
                 <div style="display:flex; align-items:center">

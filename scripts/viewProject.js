@@ -21,7 +21,8 @@ var backButtonProfile = document.getElementById("backIcon_profile");
 
 if (backButton){
     backButton.addEventListener("click", function(){
-        window.location = "../html/homepage.html";
+        var url = document.referrer;
+        window.location = url;
     })
 }
 
