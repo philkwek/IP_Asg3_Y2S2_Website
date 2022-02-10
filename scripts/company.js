@@ -18,9 +18,13 @@ const storage = getStorage();
 
 //References
 var uid;
+var companyId;
 var companyProjectData;
 var projectKeysArray;
 var pageNumber = 0;
+var inviteDesignerBtn = document.getElementById("inviteDesignerBtn");
+var acceptInvite = document.getElementById("invitedToCompanyAccept");
+var rejectInvite = document.getElementById("invitedToCompanyReject");
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -30,16 +34,77 @@ onAuthStateChanged(auth, (user) => {
     } 
 });
 
+if (acceptInvite){
+    acceptInvite.addEventListener("click", function(){
+        AddUserToCompany(uid);
+    });
+    rejectInvite.addEventListener("click", function(){
+        const dbref = ref(db);
+        const updateUserCompany = {};
+        updateUserCompany['/users/' + uid + "/companyId"] = 0;
+        return update(dbref, updateUserCompany); //removes company id to indicate that user did not want to join company
+    })
+}
+
+if (inviteDesignerBtn){
+    inviteDesignerBtn.addEventListener("click", function(){
+        InviteDesigner(document.getElementById("designerEmailInput").value)
+    })
+}
+
+function AddUserToCompany(userId){
+    const dbref = ref(db);
+    get(child(dbref, "company/" + companyId)).then((snapshot)=>{
+        if (snapshot.exists()){
+            var data = snapshot.val();
+            console.log(data);
+            var employeeList = data.employeeList; //get employee list
+            employeeList.push(userId);
+
+            //Update company data to include new employee
+            set(ref(db, 'company/' + companyId + '/employeeList'), employeeList).then(()=>{
+                location.reload();
+            })      
+        } else {
+            console.log("error");
+        }
+    });
+}
+
 function GetUserCompanyId(userId){
     const dbref = ref(db);
     get(child(dbref, "users/" + userId)).then((snapshot)=>{
         if(snapshot.exists()){
             var data = snapshot.val();
-            if (data.companyId != 0){ //checks if user is currently in a company or not
-                document.getElementById("companyData").style.display = "";
-                GetCompanyProjects(data.companyId);
-                GetCompanyEmployees(data.companyId);
-                GetCompanyName(data.companyId);
+            if (data.companyId != 0){ //checks if user is currently in a company, invited to a company or not in an company
+                companyId = data.companyId;
+
+                //check if user has accepted invitation to company or not
+                get(child(dbref, "company/" + companyId)).then((snapshot)=>{
+                    if (snapshot.exists()){
+                        var data = snapshot.val();
+                        console.log(data);
+                        var employeeList = data.employeeList; //get employee list
+                        var userAccepted = false;
+                        for (let i=0; i<employeeList.length; i++){ //check if userId is in employee list, if exist, then user has accepted invitation
+                            if (employeeList[i] == userId){
+                                userAccepted = true;
+                                document.getElementById("companyData").style.display = "";
+                                GetCompanyProjects(companyId);
+                                GetCompanyEmployees(companyId);
+                                GetCompanyName(companyId);
+                                break
+                            }
+                        }
+                        if (userAccepted == false){ //if user has not accepted, ask user if they want to accept
+                            document.getElementById("invitedToCompany").style.display = "";
+                            document.getElementById("invitedToCompanyName").innerHTML = data.companyName;
+                        }
+                    } else {
+                        console.log("error");
+                    }
+                });
+
             } else { //if not in company, displays message that user is not in company
                 document.getElementById("noCompanyTitle").style.display = "";
             }
@@ -205,4 +270,33 @@ function GetCompanyEmployees(companyId){
             console.log("Failed to get Employees");
         }
     });
+}
+
+function ValidateEmail(input) //function for checking if input is an email or not
+{
+    var re = /\S+@\S+\.\S+/;
+    return re.test(input);
+}
+
+function InviteDesigner(email){
+    if(ValidateEmail(email)){
+        //runs if input is an email
+        //check if a designer with email exists
+        const searchQuery = query(ref(db, 'users'), orderByChild("email"), equalTo(email));
+        get(searchQuery).then((snapshot)=>{
+            if (snapshot.exists()){
+                var data = Object.values(snapshot.val());
+                const userId = data[0].databaseId;
+
+                //updates to invite designer to company, designer has to accept invitation
+                set(ref(db, 'users/' + userId + "/companyId"), companyId).then(()=>{
+                    alert("Invited Designer Successfully!");
+                })  
+            } else {
+                alert("Designer does not exist!")
+            }
+        })
+    } else {
+        alert("Please enter an Email!");
+    }
 }

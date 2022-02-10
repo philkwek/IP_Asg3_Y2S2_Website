@@ -163,3 +163,9 @@ a:link {
     margin-bottom: 0px;
     font-weight: 500;
 }
+
+.companyInvite{
+    font-size: 1.8rem;
+    text-align: center;
+    font-weight: 500;
+}
