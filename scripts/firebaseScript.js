@@ -205,7 +205,6 @@ function UploadImage(){
           alert("Uploaded File!");
           location.reload();
       })
-
   } else {
       alert("You have not selected a image!")
   }
