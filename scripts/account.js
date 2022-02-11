@@ -27,14 +27,14 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       uid = user.uid;
-      GetUserData();
-      GetUserProjects();
-      GetProfilePicture();
+      getUserData();
+      getUserProjects();
+      getProfilePicture();
       // ...
     } 
 });
 
-function GetProfilePicture(){ //gets profilepicture img url from db and sets attribute
+function getProfilePicture(){ //gets profilepicture img url from db and sets attribute
     console.log("Getting profile picture");
     const pathRef = sRef(storage, "Images/userProfilePictures/" + uid +"/profilePicture.jpg");
     const profilePicSet = document.getElementById("profilePicture");
@@ -47,7 +47,7 @@ function GetProfilePicture(){ //gets profilepicture img url from db and sets att
     })
 }
 
-function GetUserData(){
+function getUserData(){
     const dbref = ref(db);
     get(child(dbref, "users/" + uid)).then((snapshot)=>{ //get company name from database
         if(snapshot.exists()){
@@ -68,7 +68,7 @@ function GetUserData(){
     });
 }
 
-function GetUserProjects(){
+function getUserProjects(){
     const dbref = ref(db);
     const userProjects = query(ref(db, 'projects/'), orderByChild("creator"), equalTo(uid))
     get(userProjects).then((snapshot)=>{
@@ -173,7 +173,7 @@ function nextPage(newPageNumber){ //loads projects based on page number clicked
 
         document.getElementById(projectId).style.display = "inline";
         document.getElementById(projectId).addEventListener("click", function(){
-            ViewProject(i);
+            viewProject(i);
         });
         document.getElementById(nameId).innerHTML = profileProjectData[i].nameOfLayout;
         
@@ -192,7 +192,7 @@ function nextPage(newPageNumber){ //loads projects based on page number clicked
     }
 }
 
-function ViewProject(projectArrayId){
+function viewProject(projectArrayId){
     var viewProjectKey = projectKeysArray[projectArrayId];
     localStorage.setItem("viewProjectKey", viewProjectKey); //store viewprojectid into localstorage to be retrieved when viewProject.html opens 
     window.location = "../html/viewProject_profile.html";

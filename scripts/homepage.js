@@ -34,7 +34,7 @@ if (searchButton){
 
 if (searchInput){
     searchInput.addEventListener("keydown", function(){ //runs whenever a key is pressed to print suggestions
-        SearchResults(); 
+        searchResults(); 
     })
 }
 
@@ -46,7 +46,7 @@ onAuthStateChanged(auth, (user) => {
     } 
 });
 
-function GetLatestList(){ //gets names of all projects for search
+function getLatestList(){ //gets names of all projects for search
     const mostRecentProjects = query(ref(db, 'projects'), orderByChild("dateCreated"));
     get(mostRecentProjects).then((snapshot) =>{
         var data = snapshot.val();
@@ -60,7 +60,7 @@ function GetLatestList(){ //gets names of all projects for search
 };
 
 
-function InsertLatestProject(){ //loads in the first 8 projects from db on first load
+function insertLatestProject(){ //loads in the first 8 projects from db on first load
     const dbRef = ref(getDatabase());
     const mostRecentProjects = query(ref(db, 'projects'), orderByChild("dateCreated"));
     get(mostRecentProjects).then((snapshot) =>{
@@ -82,7 +82,7 @@ function InsertLatestProject(){ //loads in the first 8 projects from db on first
 
             document.getElementById(projectId).style.display = "inline";
             document.getElementById(projectId).addEventListener("click", function(){
-                ViewProject(i);
+                viewProject(i);
             });
             document.getElementById(nameId).innerHTML = latestProjectData[i].nameOfLayout;
             if(latestProjectData[i].likes){
@@ -157,7 +157,7 @@ function nextPage(newPageNumber){ //loads projects based on page number clicked
 
         document.getElementById(projectId).style.display = "inline";
         document.getElementById(projectId).addEventListener("click", function(){
-            ViewProject(i);
+            viewProject(i);
         });
         document.getElementById(nameId).innerHTML = latestProjectData[i].nameOfLayout;
         if (latestProjectData[i].likes){
@@ -174,7 +174,7 @@ function nextPage(newPageNumber){ //loads projects based on page number clicked
     }
 }
 
-function SearchResults(){
+function searchResults(){
     var input = document.getElementById("searchInput");
     input = input.value.toUpperCase(); //converts input to all upper case, making the search none case-senstive
     for (let i=0; i<5; i++){    //hides all currently shown suggestions
@@ -193,7 +193,7 @@ function SearchResults(){
                 var suggestionId = "suggestions" + suggestionBoxUsed;
                 document.getElementById(suggestionId).innerHTML = a;
                 document.getElementById(suggestionId).addEventListener("click", function(){
-                    ViewProject(i);
+                    viewProject(i);
                 })
                 document.getElementById(suggestionId).style.display = "inline";
             } else if (i == latestProjectData.length - 1  && suggestionBoxUsed == -1){
@@ -208,13 +208,13 @@ function SearchResults(){
     }
 }
 
-function ViewProject(projectArrayId){
+function viewProject(projectArrayId){
     var viewProjectKey = projectKeysArray[projectArrayId];
     localStorage.setItem("viewProjectKey", viewProjectKey); //store viewprojectid into localstorage to be retrieved when viewProject.html opens 
     window.location = "../html/viewProject.html";
 }
 
-InsertLatestProject();
-GetLatestList();
-SearchResults();
+insertLatestProject();
+getLatestList();
+searchResults();
 

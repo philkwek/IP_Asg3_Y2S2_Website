@@ -198,7 +198,7 @@ function changeUsername(newUsername){
     return update(ref(db), usernameUpdate);
 }
 
-function UploadImage(){
+function uploadImage(){
   if (imageUploaded){ //checks to ensure that user has selected a img for upload
       const storageRef = sRef(storage, "Images/userProfilePictures/"+uid+"/"+"profilePicture.jpg");
       uploadBytes(storageRef, imageUploaded).then((snapshot) => {
@@ -210,7 +210,7 @@ function UploadImage(){
   }
 }
 
-function DeleteProfilePicture(){
+function deleteProfilePicture(){
   const pathRef = sRef(storage, "Images/userProfilePictures/" + uid +"/profilePicture.jpg");
   deleteObject(pathRef).then(() =>{
       alert("Removed Profile Picture");
@@ -226,13 +226,13 @@ if (imageInput){
 }
 if (imageUploadBtn){
   imageUploadBtn.addEventListener("click", function(){
-      UploadImage();
+    uploadImage();
   })
 }
 
 if (removeProfilePic){
   removeProfilePic.addEventListener("click", function(x){
-    DeleteProfilePicture();
+    deleteProfilePicture();
   })
 }
 

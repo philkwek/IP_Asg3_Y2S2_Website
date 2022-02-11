@@ -30,13 +30,13 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       uid = user.uid;
-      GetUserCompanyId(uid);
+      getUserCompanyId(uid);
     } 
 });
 
 if (acceptInvite){
     acceptInvite.addEventListener("click", function(){
-        AddUserToCompany(uid);
+        addUserToCompany(uid);
     });
     rejectInvite.addEventListener("click", function(){
         const dbref = ref(db);
@@ -48,11 +48,11 @@ if (acceptInvite){
 
 if (inviteDesignerBtn){
     inviteDesignerBtn.addEventListener("click", function(){
-        InviteDesigner(document.getElementById("designerEmailInput").value)
+        inviteDesigner(document.getElementById("designerEmailInput").value)
     })
 }
 
-function AddUserToCompany(userId){
+function addUserToCompany(userId){
     const dbref = ref(db);
     get(child(dbref, "company/" + companyId)).then((snapshot)=>{
         if (snapshot.exists()){
@@ -71,7 +71,7 @@ function AddUserToCompany(userId){
     });
 }
 
-function GetUserCompanyId(userId){
+function getUserCompanyId(userId){
     const dbref = ref(db);
     get(child(dbref, "users/" + userId)).then((snapshot)=>{
         if(snapshot.exists()){
@@ -90,9 +90,9 @@ function GetUserCompanyId(userId){
                             if (employeeList[i] == userId){
                                 userAccepted = true;
                                 document.getElementById("companyData").style.display = "";
-                                GetCompanyProjects(companyId);
-                                GetCompanyEmployees(companyId);
-                                GetCompanyName(companyId);
+                                getCompanyProjects(companyId);
+                                getCompanyEmployees(companyId);
+                                getCompanyName(companyId);
                                 break
                             }
                         }
@@ -114,7 +114,7 @@ function GetUserCompanyId(userId){
     });
 }
 
-function GetCompanyName(companyId){
+function getCompanyName(companyId){
     const dbref = ref(db);
     get(child(dbref, "company/" + companyId)).then((snapshot)=>{
         if(snapshot.exists()){
@@ -126,7 +126,7 @@ function GetCompanyName(companyId){
     });
 }
 
-function GetCompanyProjects(companyId){
+function getCompanyProjects(companyId){
     const searchQuery = query(ref(db, 'projects'), orderByChild("companyId"), equalTo(companyId));
     get(searchQuery).then((snapshot)=>{
         if(snapshot.exists()){
@@ -149,7 +149,7 @@ function GetCompanyProjects(companyId){
 
                 document.getElementById(projectId).style.display = "inline";
                 document.getElementById(projectId).addEventListener("click", function(){
-                    ViewProject(i);
+                    viewProject(i);
                 });
                 document.getElementById(nameId).innerHTML = companyProjectData[i].nameOfLayout;
                 
@@ -229,7 +229,7 @@ function companyNextPage(newPageNumber){ //loads projects based on page number c
 
         document.getElementById(projectId).style.display = "inline";
         document.getElementById(projectId).addEventListener("click", function(){
-            ViewProject(i);
+            viewProject(i);
         });
         document.getElementById(nameId).innerHTML = companyProjectData[i].nameOfLayout;
         
@@ -248,13 +248,13 @@ function companyNextPage(newPageNumber){ //loads projects based on page number c
     }
 }
 
-function ViewProject(projectArrayId){
-    var viewProjectKey = projectKeysArray[projectArrayId];
-    localStorage.setItem("viewProjectKey", viewProjectKey); //store viewprojectid into localstorage to be retrieved when viewProject.html opens 
+function viewProject(projectArrayId){
+    var ViewProjectKey = projectKeysArray[projectArrayId];
+    localStorage.setItem("viewProjectKey", ViewProjectKey); //store viewprojectid into localstorage to be retrieved when viewProject.html opens 
     window.location = "../html/viewProject.html";
 }
 
-function GetCompanyEmployees(companyId){
+function getCompanyEmployees(companyId){
     const searchQuery = query(ref(db, 'users'), orderByChild("companyId"), equalTo(companyId));
     get(searchQuery).then((snapshot)=>{
         if (snapshot.exists()){
@@ -272,14 +272,14 @@ function GetCompanyEmployees(companyId){
     });
 }
 
-function ValidateEmail(input) //function for checking if input is an email or not
+function validateEmail(input) //function for checking if input is an email or not
 {
     var re = /\S+@\S+\.\S+/;
     return re.test(input);
 }
 
-function InviteDesigner(email){
-    if(ValidateEmail(email)){
+function inviteDesigner(email){
+    if(validateEmail(email)){
         //runs if input is an email
         //check if a designer with email exists
         const searchQuery = query(ref(db, 'users'), orderByChild("email"), equalTo(email));

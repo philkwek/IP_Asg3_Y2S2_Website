@@ -40,7 +40,7 @@ onAuthStateChanged(auth, (user) => {
     } 
 });
 
-function LikeProject(viewProjectKey){
+function likeProject(viewProjectKey){
     var newLikeCount;
     var latestProjectData = JSON.parse(localStorage.getItem("latestProjectData"));
     var viewData = latestProjectData[viewProjectKey];
@@ -70,11 +70,11 @@ function LikeProject(viewProjectKey){
     }
 }
 
-function OpenLikeMenu(){
+function openLikeMenu(){
     console.log('clicked')
 }
 
-function GetViewProject(){
+function getViewProject(){
     var projectKey = localStorage.getItem("viewProjectKey");
     var latestProjectData = JSON.parse(localStorage.getItem("latestProjectData"));
     var viewData = latestProjectData[projectKey];
@@ -118,17 +118,17 @@ function GetViewProject(){
     }
     likeButton.addEventListener("click", function(){
         //LikeProject(latestProjectData[projectId].nameOfLayout);
-        OpenLikeMenu();
+        openLikeMenu();
     })
     confirmLike.addEventListener("click", function(){
-        LikeProject(projectKey);
+        likeProject(projectKey);
     })
     creationDate.innerHTML = viewData.dateCreated;
     bedroomCount.innerHTML = viewData.noOfBedrooms;
     furnituresUsed.innerHTML = viewData.furnitureUsed;
 }
 
-function GetImages(){
+function getImages(){
     var projectKey = localStorage.getItem("viewProjectKey");
     var latestProjectData = JSON.parse(localStorage.getItem("latestProjectData"));
     var imageData = latestProjectData[projectKey].pictures;
@@ -149,5 +149,5 @@ function GetImages(){
     }
 }
 
-GetViewProject();
-GetImages();
+getViewProject();
+getImages();
