@@ -197,3 +197,4 @@ function viewProject(projectArrayId){
     localStorage.setItem("viewProjectKey", viewProjectKey); //store viewprojectid into localstorage to be retrieved when viewProject.html opens 
     window.location = "../html/viewProject_profile.html";
 }
+

@@ -26,6 +26,10 @@ var inviteDesignerBtn = document.getElementById("inviteDesignerBtn");
 var acceptInvite = document.getElementById("invitedToCompanyAccept");
 var rejectInvite = document.getElementById("invitedToCompanyReject");
 
+var imageUploaded;
+var logoInput = document.getElementById("companyLogoUpload");
+var logoInputBtn = document.getElementById("newLogoConfirm");
+
 onAuthStateChanged(auth, (user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
@@ -93,6 +97,7 @@ function getUserCompanyId(userId){
                                 getCompanyProjects(companyId);
                                 getCompanyEmployees(companyId);
                                 getCompanyName(companyId);
+                                getCompanyLogo(companyId);
                                 break
                             }
                         }
@@ -124,6 +129,18 @@ function getCompanyName(companyId){
             console.log("Failed");
         }
     });
+}
+
+function getCompanyLogo(companyId){
+    const pathRef = sRef(storage, "Images/companyLogo/" + companyId +"/companyLogo.jpg");
+    const logoSet = document.getElementById("companyLogo");
+    getDownloadURL(pathRef).then((url)=>{
+        logoSet.setAttribute('src', url);
+    }).catch((error) =>{
+        //if does not exist, default pfp is used
+        var url = "../resources/icons/DefaultProfilePicture.png";
+        logoSet.setAttribute('src', url);
+    })
 }
 
 function getCompanyProjects(companyId){
@@ -300,3 +317,28 @@ function inviteDesigner(email){
         alert("Please enter an Email!");
     }
 }
+
+function uploadImage(){
+    if (imageUploaded){ //checks to ensure that user has selected a img for upload
+        const storageRef = sRef(storage, "Images/companyLogo/"+companyId+"/"+"companyLogo.jpg");
+        uploadBytes(storageRef, imageUploaded).then((snapshot) => {
+            alert("Uploaded File!");
+            location.reload();
+        })
+    } else {
+        alert("You have not selected a image!")
+    }
+}
+
+
+if (logoInput){ 
+    logoInput.addEventListener("change", function(){
+        imageUploaded = logoInput.files[0];
+    })
+}
+
+if (logoInputBtn){
+    logoInputBtn.addEventListener("click", function(){
+      uploadImage();
+    })
+  }
