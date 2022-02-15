@@ -125,7 +125,9 @@ function getViewProject(){
     })
     creationDate.innerHTML = viewData.dateCreated;
     bedroomCount.innerHTML = viewData.noOfBedrooms;
-    furnituresUsed.innerHTML = viewData.furnitureUsed;
+    let furnitureArray = viewData.furnitureUsed;
+    furnituresUsed.innerHTML = furnitureArray.join(", ");
+    console.log(viewData.furnitureUsed);
 }
 
 function getImages(){
