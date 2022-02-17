@@ -42,8 +42,7 @@ onAuthStateChanged(auth, (user) => {
 
 function likeProject(viewProjectKey){
     var newLikeCount;
-    var latestProjectData = JSON.parse(localStorage.getItem("latestProjectData"));
-    var viewData = latestProjectData[viewProjectKey];
+    var viewData = JSON.parse(localStorage.getItem("latestProjectData"));
 
     if(viewData.likes){
         newLikeCount = viewData.likes;
@@ -74,10 +73,9 @@ function openLikeMenu(){
     console.log('clicked')
 }
 
-function getViewProject(){
+function getViewProject(){ //gets project data from localStorage stored by homepage.js
     var projectKey = localStorage.getItem("viewProjectKey");
-    var latestProjectData = JSON.parse(localStorage.getItem("latestProjectData"));
-    var viewData = latestProjectData[projectKey];
+    var viewData = JSON.parse(localStorage.getItem("latestProjectData"));
 
     //reference html data points
     var projectTitle = document.getElementById("projectNameTitle");
@@ -130,10 +128,10 @@ function getViewProject(){
     console.log(viewData.furnitureUsed);
 }
 
-function getImages(){
+function getImages(){  //get image data fromm localstorage data that was put by homepage.js
     var projectKey = localStorage.getItem("viewProjectKey");
     var latestProjectData = JSON.parse(localStorage.getItem("latestProjectData"));
-    var imageData = latestProjectData[projectKey].pictures;
+    var imageData = latestProjectData.pictures;
 
     if (imageData){
         for (let i = 0; i<imageData.length; i++){
@@ -153,3 +151,5 @@ function getImages(){
 
 getViewProject();
 getImages();
+
+

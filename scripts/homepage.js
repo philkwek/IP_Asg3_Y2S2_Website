@@ -1,4 +1,4 @@
-import { getDatabase, ref, child, set, update, remove, get, orderByChild, query } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"
+import { getDatabase, ref, child, set, update, remove, get, orderByChild, query, onValue } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"
 import { getAuth, initializeAuth, 
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
@@ -67,7 +67,7 @@ function insertLatestProject(){ //loads in the first 8 projects from db on first
         var data = snapshot.val();
         latestProjectData = Object.values(data);
         projectKeysArray = Object.keys(data);
-        localStorage.setItem("latestProjectData", JSON.stringify(data));
+        //localStorage.setItem("latestProjectData", JSON.stringify(data)); //stores data in localstorage so that web does not need to keep getting from db
         var projectNumber = 0;
         for (let i=0; i<latestProjectData.length; i++){ //functions loops through all existing projects, displays first top 8
             projectNumber += 1;
@@ -211,10 +211,24 @@ function searchResults(){
 function viewProject(projectArrayId){
     var viewProjectKey = projectKeysArray[projectArrayId];
     localStorage.setItem("viewProjectKey", viewProjectKey); //store viewprojectid into localstorage to be retrieved when viewProject.html opens 
+    localStorage.setItem("latestProjectData", JSON.stringify(latestProjectData[projectArrayId]));
     window.location = "../html/viewProject.html";
 }
 
-insertLatestProject();
-getLatestList();
-searchResults();
+//On first load, load project from DB
+if (sessionStorage.getItem("viewProjectFirstLoad") == null){ //runs only if the data has never been loaded before
+    insertLatestProject();
+    getLatestList();
+    searchResults();
+    sessionStorage.setItem("viewProjectFirstLoad", "true"); //sets first load to true so that page will not keep getting data from db
+}
+
+const projectRef = ref(db, 'projects/'); //refreshes page to get new data only when new data has been added or changed
+onValue(projectRef, (snapshot) => {
+    insertLatestProject();
+    getLatestList();
+    searchResults();
+});
+
+
 

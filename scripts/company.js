@@ -150,7 +150,6 @@ function getCompanyProjects(companyId){
             var data = snapshot.val();
             companyProjectData = Object.values(data);
             projectKeysArray = Object.keys(data);
-            localStorage.setItem("latestProjectData", JSON.stringify(data));
             var projectNumber = 0;
             document.getElementById("companyProjectCount").innerHTML = companyProjectData.length;
             for (let i=0; i<companyProjectData.length; i++){ //functions loops through all existing projects, displays first top 8
@@ -267,6 +266,7 @@ function companyNextPage(newPageNumber){ //loads projects based on page number c
 
 function viewProject(projectArrayId){
     var ViewProjectKey = projectKeysArray[projectArrayId];
+    localStorage.setItem("latestProjectData", JSON.stringify(companyProjectData[projectArrayId]));
     localStorage.setItem("viewProjectKey", ViewProjectKey); //store viewprojectid into localstorage to be retrieved when viewProject.html opens 
     window.location = "../html/viewProject.html";
 }

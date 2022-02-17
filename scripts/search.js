@@ -125,7 +125,6 @@ function getCompanyProjects(companyId){
             var data = snapshot.val();
             companyProjectData = Object.values(data);
             projectKeysArray = Object.keys(data);
-            localStorage.setItem("latestProjectData", JSON.stringify(data));
             var projectNumber = 0;
             document.getElementById("companyProjectCount").innerHTML = companyProjectData.length;
             for (let i=0; i<companyProjectData.length; i++){ //functions loops through all existing projects, displays first top 8
@@ -221,7 +220,7 @@ function companyNextPage(newPageNumber){ //loads projects based on page number c
 
         document.getElementById(projectId).style.display = "inline";
         document.getElementById(projectId).addEventListener("click", function(){
-            ViewProject(i);
+            viewProject(i, true);
         });
         document.getElementById(nameId).innerHTML = companyProjectData[i].nameOfLayout;
         
@@ -240,9 +239,14 @@ function companyNextPage(newPageNumber){ //loads projects based on page number c
     }
 }
 
-function viewProject(projectArrayId){
+function viewProject(projectArrayId, companyTrue){
     var viewProjectKey = projectKeysArray[projectArrayId];
     localStorage.setItem("viewProjectKey", viewProjectKey); //store viewprojectid into localstorage to be retrieved when viewProject.html opens 
+    if (companyTrue === true){ //runs if function that called this function is from a search company
+        localStorage.setItem("companyProjectData", JSON.stringify(companyProjectData[projectArrayId]));
+    } else if (companyTrue === false) { //runs if function that called this function is from a search users
+        localStorage.setItem("profileProjectData", JSON.stringify(profileProjectData[projectArrayId]));
+    }
     window.location = "../html/viewProject.html";
 }
 
@@ -273,7 +277,6 @@ function getUserProjects(userId){
             profileProjectData = Object.values(data);
             projectKeysArray = Object.keys(data);
             document.getElementById("projectsCount").innerHTML = profileProjectData.length;
-            localStorage.setItem("profileProjectData", JSON.stringify(data));
             var projectNumber = 0;
             for (let i=0; i<profileProjectData.length; i++){ //functions loops through all existing projects, displays first top 8
                 projectNumber += 1;
@@ -288,7 +291,7 @@ function getUserProjects(userId){
 
                 document.getElementById(projectId).style.display = "inline";
                 document.getElementById(projectId).addEventListener("click", function(){
-                    ViewProject(i);
+                    viewProject(i, false);
                 });
                 document.getElementById(nameId).innerHTML = profileProjectData[i].nameOfLayout;
                 

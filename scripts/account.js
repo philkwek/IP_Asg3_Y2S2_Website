@@ -93,7 +93,7 @@ function getUserProjects(){
 
                 document.getElementById(projectId).style.display = "inline";
                 document.getElementById(projectId).addEventListener("click", function(){
-                    ViewProject(i);
+                    viewProject(i);
                 });
                 document.getElementById(nameId).innerHTML = profileProjectData[i].nameOfLayout;
                 
